@@ -6,15 +6,12 @@ import BasicProfileDetails from './BasicProfileDetails';
 import PhysicalTraits from './PhysicalTraits';
 import PlayingStyles from './PlayingStyles';
 import Players from '../Players/Players';
-// import Players from './Players';
 
-
-function PlayerForm () {
-
+function PlayerForm() {
   const [state, setState] = useState({
     LongPassing: 5,
     ShortPassing: 5,
-    BallControl: 5, 
+    BallControl: 5,
     Heading: 5,
     WeakFoot: 5,
     Pressing: 5,
@@ -25,24 +22,22 @@ function PlayerForm () {
     BoxtoBox: false,
     JoinsAttack: false,
     DeepLying: false,
-  })
+  });
 
   function handleChange(evt) {
     const value = evt.target.value;
     setState({
       ...state,
-      [evt.target.name]: value
+      [evt.target.name]: value,
     });
-    ;
   }
 
   function handleCheck(evt) {
     const value = evt.target.checked;
     setState({
       ...state,
-      [evt.target.name]: value
+      [evt.target.name]: value,
     });
-    ;
   }
 
   //these states are seperated because they invlove more than just onChange functions
@@ -56,52 +51,65 @@ function PlayerForm () {
   const [Agency, setAgency] = useState('');
   const [Position, setPosition] = useState('');
 
-  const values = {...state, Name, Nationality,Birthdate, Age, Club, Foot, Agency, Position}
+  const values = {
+    ...state,
+    Name,
+    Nationality,
+    Birthdate,
+    Age,
+    Club,
+    Foot,
+    Agency,
+    Position,
+  };
 
   const nextStep = () => {
     setStep(Step + 1);
-  }
+  };
 
   const prevStep = () => {
     setStep(Step - 1);
-  }
+  };
 
-  const functions = {nextStep, setName, setNationality, setBirthdate, setAge,setClub, setPosition, setAgency, setFoot}
-
+  const functions = {
+    nextStep,
+    setName,
+    setNationality,
+    setBirthdate,
+    setAge,
+    setClub,
+    setPosition,
+    setAgency,
+    setFoot,
+  };
 
   switch (Step) {
-    case 1: 
-      return (
-        <BasicProfileDetails
-        functions= {functions}
-        values = {values}/>
-      )
-    case 2: 
+    case 1:
+      return <BasicProfileDetails functions={functions} values={values} />;
+    case 2:
       return (
         <PhysicalTraits
-        Onchange = {handleChange}
-        values = {values}
-        prevStep = {prevStep}
-        nextStep = {nextStep}/>
-      )
-    case 3: 
+          Onchange={handleChange}
+          values={values}
+          prevStep={prevStep}
+          nextStep={nextStep}
+        />
+      );
+    case 3:
       return (
-        <PlayingStyles 
-        Onchange = {handleCheck}
-        values = {values}
-        prevStep = {prevStep}
-        Submit = {nextStep}/>
-      )
+        <PlayingStyles
+          Onchange={handleCheck}
+          values={values}
+          prevStep={prevStep}
+          Submit={nextStep}
+        />
+      );
     case 4:
-      return (
-        <Players/>
-      )
+      return <Players />;
     // never forget the default case, otherwise VS code would be mad!
-    default: 
-      // do nothing
+    default:
+    // do nothing
   }
-
-  
 }
 
-export default PlayerForm
+export default PlayerForm;

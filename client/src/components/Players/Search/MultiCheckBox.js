@@ -18,11 +18,7 @@ const MenuProps = {
   },
 };
 
-const foot = [
-  'Right',
-  'Left',
-  'Both',
-];
+const foot = ['Right', 'Left', 'Both'];
 
 export default function MultipleSelectCheckmarks() {
   const [strongfoot, setFoot] = React.useState([]);
@@ -31,10 +27,7 @@ export default function MultipleSelectCheckmarks() {
     const {
       target: { value },
     } = event;
-    setFoot(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
+    setFoot(typeof value === 'string' ? value.split(',') : value);
   };
 
   return (
@@ -62,4 +55,3 @@ export default function MultipleSelectCheckmarks() {
     </div>
   );
 }
-

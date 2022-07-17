@@ -1,8 +1,9 @@
 module.exports = {
   env: {
     browser: true,
+    es2021: true,
   },
-  extends: ['plugin:react/recommended', 'prettier'],
+  extends: ['prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -10,7 +11,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['prettier'],
   rules: {
     'linebreak-style': 'off',
     'react/prop-types': 'off',
