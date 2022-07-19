@@ -5,7 +5,7 @@ import { reset } from '../Players/playersSlice';
 
 const Navigation = (props) => {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   if (props.isSignedIn) {
     return (
       <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -18,6 +18,14 @@ const Navigation = (props) => {
           className="f3 link dim black underline pa3 pointer"
         >
           Sign Out
+        </p>
+        <p
+          onClick={() => {
+            navigate('/users');
+          }}
+          className="f3 link dim black underline pa3 pointer"
+        >
+          Connections
         </p>
       </nav>
     );

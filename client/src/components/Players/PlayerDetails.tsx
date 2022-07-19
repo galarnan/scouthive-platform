@@ -1,19 +1,29 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function PlayerDetails(props) {
+function PlayerDetails(): JSX.Element {
   useEffect(() => {
     window.localStorage.setItem('IS_LOGGED_IN', JSON.stringify(true));
   });
 
-  const location = useLocation();
-  const details = location.state.details;
+  interface LocationProps {
+    details: [];
+  }
+
+  interface detailtype {
+    Foot: string;
+    Agency: string;
+    Name: string;
+  }
+
+  const location = useLocation().state as LocationProps;
+  const details = location.details;
 
   return (
     <div>
       <h1>got into player profile!</h1>
       {details.map((detail, key) => {
-        const { Foot, Agency, Name } = detail;
+        const { Foot, Agency, Name }: detailtype = detail;
         return (
           <div key={key}>
             <p>{Foot}</p>

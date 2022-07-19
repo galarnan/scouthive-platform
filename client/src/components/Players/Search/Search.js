@@ -79,6 +79,10 @@ function Search(props) {
       max={40}
       min={13}
       name="Ages"
+      sx={{
+        width: 200,
+        color: 'white',
+      }}
     />
   );
 

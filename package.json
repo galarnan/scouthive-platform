@@ -1,0 +1,23 @@
+{
+  "name": "scouthive-platform",
+  "version": "1.0.0",
+  "description": "Football scouting platform",
+  "main": "index.js",
+  "scripts": {
+    "start-server": "npm run --prefix ./server start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/galarnan/scouthive-platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/galarnan/scouthive-platform/issues"
+  },
+  "homepage": "https://github.com/galarnan/scouthive-platform#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.6"
+  }
+}

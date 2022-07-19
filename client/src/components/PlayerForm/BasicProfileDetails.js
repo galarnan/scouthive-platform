@@ -11,11 +11,11 @@ function BasicProfileDetails(props) {
 
   const [URL, setURL] = useState('');
 
-  const onNameChange = (event) => {
+  const onNameChange = event => {
     functions.setName(event.target.value);
   };
 
-  const onNationalityChange = (event) => {
+  const onNationalityChange = event => {
     functions.setNationality(event.target.value);
   };
 
@@ -23,23 +23,23 @@ function BasicProfileDetails(props) {
   //   functions.setBirthdate(event.target.value)
   // }
 
-  const onAgeChange = (event) => {
+  const onAgeChange = event => {
     functions.setAge(event.target.value);
   };
 
-  const onClubChange = (event) => {
+  const onClubChange = event => {
     functions.setClub(event.target.value);
   };
 
-  const onURLChange = (event) => {
+  const onURLChange = event => {
     setURL(event.target.value);
   };
 
-  const onPositionChange = (event) => {
+  const onPositionChange = event => {
     functions.setPosition(event.target.value);
   };
 
-  const Continue = (e) => {
+  const Continue = e => {
     e.preventDefault();
     functions.nextStep();
   };
@@ -52,8 +52,8 @@ function BasicProfileDetails(props) {
         URL: URL,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         //transfermarkt sometimes doesn't include a certain field, we can check in the data[3] element which is supposed to be age (number) and find out which field pattern exists in the player profile
         if (isNaN(data[3])) {
           console.log(data);
@@ -75,7 +75,7 @@ function BasicProfileDetails(props) {
           functions.setAgency(data[8]);
         }
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   return (
