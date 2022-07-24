@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DatePicker from '../DatePicker/DatePicker';
 import 'tachyons';
+import axios from 'axios';
 
 function BasicProfileDetails(props) {
   const functions = props.functions;
@@ -45,14 +46,11 @@ function BasicProfileDetails(props) {
   };
 
   const onSubmitURL = () => {
-    fetch('http://localhost:3000/transfermarkt', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    axios
+      .post('/transfermarkt', {
         URL: URL,
-      }),
-    })
-      .then(response => response.json())
+      })
+      .then(response => response.data)
       .then(data => {
         //transfermarkt sometimes doesn't include a certain field, we can check in the data[3] element which is supposed to be age (number) and find out which field pattern exists in the player profile
         if (isNaN(data[3])) {
@@ -75,7 +73,9 @@ function BasicProfileDetails(props) {
           functions.setAgency(data[8]);
         }
       })
-      .catch(err => console.log(err));
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (

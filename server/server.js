@@ -10,9 +10,13 @@ const handleplayerdetails = require('./controllers/playerdetails');
 const fetchURLdata = require('./controllers/transfermarkt');
 const insertform = require('./controllers/addplayer');
 const UsersList = require('./controllers/userlist');
-const AddFriendRequest = require('./controllers/add_friend_request');
-const PullFriendRequests = require('./controllers/pull_friend_requests');
-const AcceptFriendRequests = require('./controllers/accept_friend_request');
+const AddFriendRequest = require('./controllers/AddFriendRequest');
+const PullFriendRequests = require('./controllers/PullFriendRequests');
+const AcceptFriendRequests = require('./controllers/AcceptFriendRequest');
+const CreateRequest = require('./controllers/createrequest');
+const PullOthersPlayerRequests = require('./controllers/PullOthersPlayerRequests');
+const MyPlayers = require('./controllers/MyFriends');
+const MyPlayerRequests = require('./controllers/PullMyPlayerRequests');
 
 const app = express();
 
@@ -35,10 +39,14 @@ app.post('/home', (req, res) => { handleplayertable.handleplayertable(req, res, 
 app.post('/playerdetails', (req, res) => { handleplayerdetails.handleplayerdetails(req, res, db); });
 app.post('/transfermarkt', (req, res) => { fetchURLdata.fetchURLdata(req, res); });
 app.post('/addplayer', (req, res) => { insertform.handlePlayerAdd(req, res, db); });
-app.get('/users', (req, res) => { UsersList.handleUsersList(req, res, db); });
+app.post('/users', (req, res) => { UsersList.handleUsersList(req, res, db); });
 app.post('/userspage_addfriend', (req, res) => { AddFriendRequest.handleFriendRequest(req, res, db); });
 app.post('/userspage_getfriendrequests', (req, res) => { PullFriendRequests.handlePullFriendRequests(req, res, db); });
 app.post('/userspage_acceptfriend', (req, res) => { AcceptFriendRequests.handleFriendRequestAccept(req, res, db); });
+app.post('/createrequest', (req, res) => { CreateRequest.handleCreateRequest(req, res, db); });
+app.post('/getplayerrequests', (req, res) => { PullOthersPlayerRequests.handlePullOthersPlayerRequests(req, res, db); });
+app.post('/myplayers', (req, res) => { MyPlayers.handleMyFriends(req, res, db); });
+app.post('/myplayerrequests', (req, res) => { MyPlayerRequests.handlePullMyPlayerRequests(req, res, db); });
 
 app.listen(3000, () => {
   console.log('application is running on port 3000');

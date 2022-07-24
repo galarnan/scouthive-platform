@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   players: [],
@@ -10,14 +11,10 @@ export const fetchPlayers = createAsyncThunk(
   'players/fetchPlayers',
   async () => {
     const userid = window.localStorage.getItem('USER_ID');
-    const response = await fetch('http://localhost:3000/home', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userid: userid,
-      }),
+    const response = await axios.post('/home', {
+      userid: userid,
     });
-    return response.json();
+    return response.data;
   }
 );
 
@@ -55,6 +52,6 @@ const playersSlice = createSlice({
 
 export const { reset, filter, addplayer } = playersSlice.actions;
 
-export const selectAllPlayers = (state) => state.players.players;
+export const selectAllPlayers = state => state.players.players;
 
 export default playersSlice.reducer;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Signin(props) {
   const [signInEmail, setEmail] = useState('');
@@ -17,15 +18,12 @@ function Signin(props) {
 
   const onSubmitSignIn = () => {
     console.log(signInEmail, signInPassword);
-    fetch('http://localhost:3000/signin', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    axios
+      .post('/signin', {
         email: signInEmail,
         password: signInPassword,
-      }),
-    })
-      .then(response => response.json())
+      })
+      .then(response => response.data)
       .then(user => {
         if (user.id) {
           console.log('signed in');

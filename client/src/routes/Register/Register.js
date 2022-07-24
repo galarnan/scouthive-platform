@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Register(props) {
   let navigate = useNavigate();
@@ -21,19 +22,16 @@ function Register(props) {
   };
 
   const onSubmitSignIn = () => {
-    fetch('http://localhost:3000/register', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    axios
+      .post('/register', {
         email: email,
         password: password,
         name: name,
-      }),
-    })
-      .then(response => response.json())
+      })
+      .then(response => response.data)
       .then(user => {
         if (user.email) {
-          // props.loadUser(user);
+          window.localStorage.setItem('USER_ID', JSON.stringify(user.id));
           props.authentication(true);
           navigate('/home', { replace: true });
         }

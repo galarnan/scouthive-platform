@@ -9,12 +9,12 @@ function PhysicalTraits(props) {
   const Onchange = props.Onchange;
   const values = props.values;
 
-  const Previous = (e) => {
+  const Previous = e => {
     e.preventDefault();
     props.prevStep();
   };
 
-  const Next = (e) => {
+  const Next = e => {
     e.preventDefault();
     props.nextStep();
   };
@@ -62,8 +62,8 @@ function PhysicalTraits(props) {
             {slide('Heading', values.Heading)}
           </div>
           <div className="input-group gap-3">
-            <label>Weak foot</label>
-            {slide('WeakFoot', values.WeakFoot)}
+            <label>Dribbling</label>
+            {slide('Dribbling', values.Dribbling)}
           </div>
         </div>
         <div className="mt-5 input-group mx-3 col-sm gap-5">

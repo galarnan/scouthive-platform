@@ -13,13 +13,10 @@ const fetchURLdata = (req, res) => {
       });
       details.push($('.data-header__headline-wrapper').text().trim().split('\n')[1].trim());
       res.json(details);
-    });
+    })
+    .catch(() => res.status(400).json('unable to register'));
 };
 
 module.exports = {
   fetchURLdata,
 };
-
-// const data_url = req.body.URL
-// fetch(data_url)
-// .then(response => res.json(response))

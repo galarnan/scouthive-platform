@@ -3,12 +3,36 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset } from '../Players/playersSlice';
 
-const Navigation = (props) => {
+const Navigation = props => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   if (props.isSignedIn) {
     return (
       <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <p
+          onClick={() => {
+            navigate('/users');
+          }}
+          className="f3 link dim black underline pa3 pointer"
+        >
+          Connections
+        </p>
+        <p
+          onClick={() => {
+            navigate('/playerrequests');
+          }}
+          className="f3 link dim black underline pa3 pointer"
+        >
+          Player Requests
+        </p>
+        <p
+          onClick={() => {
+            navigate('/myplayerrequests');
+          }}
+          className="f3 link dim black underline pa3 pointer"
+        >
+          My Requests
+        </p>
         <p
           onClick={() => {
             dispatch(reset());
@@ -18,14 +42,6 @@ const Navigation = (props) => {
           className="f3 link dim black underline pa3 pointer"
         >
           Sign Out
-        </p>
-        <p
-          onClick={() => {
-            navigate('/users');
-          }}
-          className="f3 link dim black underline pa3 pointer"
-        >
-          Connections
         </p>
       </nav>
     );

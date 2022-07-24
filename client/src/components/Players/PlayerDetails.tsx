@@ -20,7 +20,7 @@ function PlayerDetails(): JSX.Element {
   const details = location.details;
 
   return (
-    <div>
+    <div className="row">
       <h1>got into player profile!</h1>
       {details.map((detail, key) => {
         const { Foot, Agency, Name }: detailtype = detail;

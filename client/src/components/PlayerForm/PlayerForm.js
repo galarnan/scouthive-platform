@@ -13,7 +13,7 @@ function PlayerForm() {
     ShortPassing: 5,
     BallControl: 5,
     Heading: 5,
-    WeakFoot: 5,
+    Dribbling: 5,
     Pressing: 5,
     LongShot: 5,
     Tackling: 5,

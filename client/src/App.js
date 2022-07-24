@@ -9,6 +9,10 @@ import Players from './components/Players/Players';
 import PlayerDetails from './components/Players/PlayerDetails';
 import PlayerForm from './components/PlayerForm/PlayerForm';
 import Connections from './routes/Connections/Connections';
+import CreateRequest from './routes/PlayerRequestForm/PlayerRequestForm';
+import PlayerRequests from './routes/OthersPlayerRequests/OthersPlayerRequests';
+import PlayerRequestDetails from './routes/PlayerRequestPage/ViewRequestDetails';
+import MyPlayerRequests from './routes/MyPlayerRequests/MyPlayerRequests';
 
 function App() {
   const [isSignedIn, setSignedin] = useState(false);
@@ -60,7 +64,11 @@ function App() {
             element={<Register authentication={authentication} />}
           />
           <Route path="/addplayer" element={<PlayerForm />} />
+          <Route path="/createrequest" element={<CreateRequest />} />
           <Route path="/users" element={<Connections />} />
+          <Route path="/playerrequests" element={<PlayerRequests />} />
+          <Route path="/myplayerrequests" element={<MyPlayerRequests />} />
+          <Route path="/requestdetails" element={<PlayerRequestDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

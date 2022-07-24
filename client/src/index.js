@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 import store from './store';
 import { Provider } from 'react-redux';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

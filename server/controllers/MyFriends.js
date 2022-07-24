@@ -1,18 +1,18 @@
-// Query filters out friends or friends pending
-const handleUsersList = (req, res, db) => {
+const handleMyFriends = (req, res, db) => {
   const { userid } = req.body;
   db.select('user_sent').from('friends')
     .where('user_received', '=', userid)
+    .andWhere('status', 'Confirmed')
     .union(
       db.select('user_received').from('friends')
-        .where('user_sent', '=', userid),
+        .where('user_sent', '=', userid)
+        .andWhere('status', 'Confirmed'),
     )
     .then(
       (FriendIds) => {
         const ids = FriendIds.map((id) => id.user_sent);
-        ids.push(userid);
         db.select('*').from('users')
-          .whereNotIn('id', ids)
+          .whereIn('id', ids)
           .then((results) => res.json(results));
       },
     )
@@ -20,5 +20,5 @@ const handleUsersList = (req, res, db) => {
 };
 
 module.exports = {
-  handleUsersList,
+  handleMyFriends,
 };

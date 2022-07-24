@@ -1,33 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const UsersList = () => {
   const [users, setUserList] = useState([]);
   const active_user = parseInt(window.localStorage.getItem('USER_ID'), 10);
 
   useEffect(() => {
-    fetch('http://localhost:3000/users', {
-      method: 'get',
-    })
-      .then(response => response.json())
-      .then(users => setUserList(users));
+    axios
+      .post('/users', {
+        userid: active_user,
+      })
+      .then(response => setUserList(response.data));
   }, []);
 
-  const add_friend = userid => {
-    fetch('http://localhost:3000/userspage_addfriend', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+  const add_friend = (userid, e) => {
+    axios
+      .post('/userspage_addfriend', {
         user_sent: active_user,
         user_received: userid,
         status: 'Pending',
-      }),
-    }).then(response => response.json());
+      })
+      .then(response => {
+        if (response.data) {
+          e.target.className = 'btn btn-secondary disabled';
+          e.target.innerHTML = 'Request Sent';
+        }
+      });
   };
 
   return (
-    <div>
+    <div className="row">
       {users.map((user, i) => {
         return (
           <div className="card w-40 mx-5 my-1" key={i}>
@@ -39,7 +43,7 @@ const UsersList = () => {
                 className="btn btn-light"
                 onClick={add_friend.bind(this, user.id)}
               >
-                Add friend
+                Connect
               </button>
             </div>
           </div>

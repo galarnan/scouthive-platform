@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const FriendRequests = () => {
   const [friend_requests, setFriend_Requests] = useState([]);
   const active_user = parseInt(window.localStorage.getItem('USER_ID'), 10);
 
   useEffect(() => {
-    fetch('http://localhost:3000/userspage_getfriendrequests', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    axios
+      .post('/userspage_getfriendrequests', {
         userid: active_user,
-      }),
-    })
-      .then(response => response.json())
+      })
+      .then(response => response.data)
       .then(requests => setFriend_Requests(requests));
   }, []);
 
-  const accept_friend = userid => {
-    fetch('http://localhost:3000/userspage_acceptfriend', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+  const accept_friend = (userid, e) => {
+    axios
+      .post('/userspage_acceptfriend', {
         user_sent: userid,
         user_received: active_user,
-      }),
-    }).then(response => response.json());
+      })
+      .then(response => {
+        if (response.data) {
+          e.target.className = 'btn btn-success disabled';
+          e.target.innerHTML = 'Added';
+        }
+      });
   };
 
   return (
-    <div>
+    <div className="row">
       {friend_requests.map((request, i) => {
         return (
           <div className="card w-40 mx-5 my-1" key={i}>
