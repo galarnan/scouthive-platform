@@ -9,7 +9,7 @@ const UsersList = () => {
 
   useEffect(() => {
     axios
-      .post('/users', {
+      .post('/api/connections', {
         userid: active_user,
       })
       .then(response => setUserList(response.data));
@@ -17,7 +17,7 @@ const UsersList = () => {
 
   const add_friend = (userid, e) => {
     axios
-      .post('/userspage_addfriend', {
+      .post('/api/userspage_addfriend', {
         user_sent: active_user,
         user_received: userid,
         status: 'Pending',

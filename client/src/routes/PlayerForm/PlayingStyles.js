@@ -5,7 +5,7 @@ import { FormGroup, Checkbox, FormControlLabel } from '@mui/material/';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addplayer } from '../Players/playersSlice';
+import { addplayer } from '../Home/playersSlice';
 import axios from 'axios';
 
 function PlayingStyles(props) {
@@ -18,7 +18,7 @@ function PlayingStyles(props) {
 
   const addtodb = () => {
     axios
-      .post('/addplayer', {
+      .post('/api/addplayer', {
         ...values,
         userid: userid,
       })

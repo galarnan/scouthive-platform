@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
 import { Slider } from '@mui/material/';
-import { selectAllPlayers } from '../playersSlice';
+import { selectAllPlayers } from './playersSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { filter } from '../playersSlice';
+import { filter } from './playersSlice';
 
 const feet = [
   { value: 'right', label: 'right' },
@@ -46,14 +46,13 @@ function Search(props) {
   }
 
   //function for multiselect inputs
-  function handleChangemulti(field, evt, third) {
+  function handleChangemulti(field, evt) {
     const value = evt.map(obj => obj.value);
     setFilters({
       ...filters,
       [field]: value,
     });
   }
-
   let filteredplayers = players
     .filter(player => {
       return player.Name.toLowerCase().includes(filters.Name.toLowerCase());

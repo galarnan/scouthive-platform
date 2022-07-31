@@ -1,17 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { reset } from '../Players/playersSlice';
+import { reset } from '../../routes/Home/playersSlice';
 
 const Navigation = props => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(`issgined in props in navigation is ${props.isSignedIn}`);
   if (props.isSignedIn) {
     return (
       <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <p
           onClick={() => {
-            navigate('/users');
+            navigate('/connections');
           }}
           className="f3 link dim black underline pa3 pointer"
         >

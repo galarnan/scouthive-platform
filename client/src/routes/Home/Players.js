@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState, useLayoutEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'tachyons';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPlayers } from './playersSlice';
-import Search from './Search/Search';
+import Search from './Search';
 import axios from 'axios';
 
 function Players(props) {
@@ -17,16 +17,16 @@ function Players(props) {
 
   const fetchStatus = useSelector(state => state.players.status);
 
-  useEffect(() => {
+  useMemo(() => {
     if (fetchStatus === 'idle') {
       dispatch(fetchPlayers());
     }
-  }, [fetchStatus, dispatch]);
+  }, [fetchStatus]);
 
   function fetch_playerdetails(playerID) {
     axios
-      .post('/playerdetails', {
-        playerID: playerID,
+      .post('/api/playerdetails', {
+        playerID,
       })
       .then(response => response.data)
       .then(details_result =>
@@ -40,7 +40,7 @@ function Players(props) {
       <td>
         <button
           type="button"
-          onClick={fetch_playerdetails.bind(this, player.playerID)}
+          onClick={() => fetch_playerdetails(player.playerID)}
           className="btn btn-link"
         >
           {player.Name}
