@@ -11,7 +11,7 @@ const OthersPlayerRequests = () => {
 
   useEffect(() => {
     axios
-      .post('/getplayerrequests', {
+      .post('/api/getplayerrequests', {
         userid: active_user,
       })
       .then(response => response.data)

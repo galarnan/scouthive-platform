@@ -9,7 +9,7 @@ const FriendRequests = () => {
 
   useEffect(() => {
     axios
-      .post('/userspage_getfriendrequests', {
+      .post('/api/userspage_getfriendrequests', {
         userid: active_user,
       })
       .then(response => response.data)
@@ -18,7 +18,7 @@ const FriendRequests = () => {
 
   const accept_friend = (userid, e) => {
     axios
-      .post('/userspage_acceptfriend', {
+      .post('/api/userspage_acceptfriend', {
         user_sent: userid,
         user_received: active_user,
       })

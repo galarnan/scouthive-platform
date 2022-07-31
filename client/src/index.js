@@ -8,8 +8,11 @@ import store from './store';
 import { Provider } from 'react-redux';
 import axios from 'axios';
 
+const token = JSON.parse(window.localStorage.getItem('ACCESS_TOKEN'));
+console.log(`token value ${token}`);
 axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Authorization'] = token;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function PlayerDetails(): JSX.Element {
+const PlayerDetails: FC = () => {
   useEffect(() => {
     window.localStorage.setItem('IS_LOGGED_IN', JSON.stringify(true));
   });

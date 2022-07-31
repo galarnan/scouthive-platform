@@ -5,7 +5,7 @@ import 'tachyons';
 import BasicProfileDetails from './BasicProfileDetails';
 import PhysicalTraits from './PhysicalTraits';
 import PlayingStyles from './PlayingStyles';
-import Players from '../Players/Players';
+import Players from '../Home/Players';
 
 function PlayerForm() {
   const [traits, setTrait] = useState({

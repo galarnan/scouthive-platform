@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   players: [],
@@ -11,7 +12,7 @@ export const fetchPlayers = createAsyncThunk(
   'players/fetchPlayers',
   async () => {
     const userid = window.localStorage.getItem('USER_ID');
-    const response = await axios.post('/home', {
+    const response = await axios.post('/api/players', {
       userid: userid,
     });
     return response.data;

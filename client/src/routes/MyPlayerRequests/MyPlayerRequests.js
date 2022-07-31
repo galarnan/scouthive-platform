@@ -10,13 +10,12 @@ const MyPlayerRequests = () => {
 
   useEffect(() => {
     axios
-      .post('/myplayerrequests', {
+      .post('/api/myplayerrequests', {
         userid: active_user,
       })
       .then(response => response.data)
       .then(requests => setPlayerRequests(requests));
   }, []);
-
 
   console.log(PlayerRequests);
 

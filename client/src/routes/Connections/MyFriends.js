@@ -9,7 +9,7 @@ const MyPlayers = () => {
 
   useEffect(() => {
     axios
-      .post('/myplayers', {
+      .post('/api/myplayers', {
         userid: active_user,
       })
       .then(response => setMyPlayers(response.data));

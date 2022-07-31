@@ -5,6 +5,7 @@ import axios from 'axios';
 function Signin(props) {
   const [signInEmail, setEmail] = useState('');
   const [signInPassword, setPassword] = useState('');
+  const [authError, setauthError] = useState(false);
 
   let navigate = useNavigate();
 
@@ -25,12 +26,25 @@ function Signin(props) {
       })
       .then(response => response.data)
       .then(user => {
-        if (user.id) {
+        if (user.loggedUser.id) {
           console.log('signed in');
           props.authentication(true);
-          window.localStorage.setItem('USER_ID', JSON.stringify(user.id));
-          navigate('/home', { replace: true });
+          window.localStorage.setItem(
+            'USER_ID',
+            JSON.stringify(user.loggedUser.id)
+          );
+          window.localStorage.setItem(
+            'ACCESS_TOKEN',
+            JSON.stringify(user.Token)
+          );
+          console.log(`user token from login ${user.Token}`);
+          axios.defaults.headers.common['Authorization'] = user.Token;
+          navigate('/home');
         }
+      })
+      .catch(err => {
+        setauthError(true);
+        console.log(err);
       });
   };
 
@@ -65,6 +79,9 @@ function Signin(props) {
               />
             </div>
           </fieldset>
+          <p className="text red">
+            {authError ? 'Incorrect email or password' : ''}
+          </p>
           <div className="">
             <input
               onClick={onSubmitSignIn}

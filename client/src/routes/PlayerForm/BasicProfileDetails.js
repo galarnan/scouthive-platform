@@ -2,15 +2,17 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DatePicker from '../DatePicker/DatePicker';
+import DatePicker from '../../components/DatePicker/DatePicker';
 import 'tachyons';
 import axios from 'axios';
+import Spinner from 'react-bootstrap/Spinner';
 
 function BasicProfileDetails(props) {
   const functions = props.functions;
   const values = props.values;
 
   const [URL, setURL] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onNameChange = event => {
     functions.setName(event.target.value);
@@ -46,8 +48,9 @@ function BasicProfileDetails(props) {
   };
 
   const onSubmitURL = () => {
+    setLoading(true);
     axios
-      .post('/transfermarkt', {
+      .post('/api/transfermarkt', {
         URL: URL,
       })
       .then(response => response.data)
@@ -59,7 +62,7 @@ function BasicProfileDetails(props) {
           functions.setAge(data[2]);
           functions.setNationality(data[4]);
           functions.setClub(data[8]);
-          functions.setPosition(data[5]);
+          functions.setPosition(data[5].slice(data[5].indexOf('-') + 2));
           functions.setFoot(data[6]);
           functions.setAgency(data[7]);
         } else {
@@ -68,18 +71,21 @@ function BasicProfileDetails(props) {
           functions.setAge(data[3]);
           functions.setNationality(data[5]);
           functions.setClub(data[9]);
-          functions.setPosition(data[6]);
+          functions.setPosition(data[6].slice(data[6].indexOf('-') + 2));
           functions.setFoot(data[7]);
           functions.setAgency(data[8]);
         }
       })
+      .then(result => setLoading(false))
       .catch(error => {
+        alert('Could not load player details');
         console.log(error);
+        setLoading(false);
       });
   };
 
   return (
-    <div>
+    <div className={loading ? 'opacity-25' : ''}>
       <h1>Basic Details</h1>
       <h5>
         Paste Transfermarkt URL of player's profile to load details
@@ -91,13 +97,11 @@ function BasicProfileDetails(props) {
           type="text"
           className="w-60"
           placeholder="URL example: https://www.transfermarkt.com/lionel-messi/profil/spieler/28003"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
         />
         <div className="input-group-append">
           <button
             onClick={onSubmitURL}
-            className="btn btn-outline-secondary"
+            className="btn btn-primary"
             type="button"
           >
             Load Player
