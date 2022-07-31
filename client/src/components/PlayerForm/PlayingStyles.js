@@ -6,6 +6,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addplayer } from '../Players/playersSlice';
+import axios from 'axios';
 
 function PlayingStyles(props) {
   const userid = window.localStorage.getItem('USER_ID');
@@ -16,30 +17,27 @@ function PlayingStyles(props) {
   const values = props.values;
 
   const addtodb = () => {
-    fetch('http://localhost:3000/addplayer', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    axios
+      .post('/addplayer', {
         ...values,
         userid: userid,
-      }),
-    })
-      .then((response) => response.json())
-      .then((player) => {
+      })
+      .then(response => response.data)
+      .then(player => {
         if (player) {
           dispatch(addplayer(player));
           navigate('/home', { replace: true });
         }
       })
-      .catch('error in adding player');
+      .catch(err => console.log(err));
   };
 
-  const Previous = (e) => {
+  const Previous = e => {
     e.preventDefault();
     props.prevStep();
   };
 
-  const Position = (pos) => {
+  const Position = pos => {
     if (pos.includes('midfield')) {
       return (
         <FormGroup>

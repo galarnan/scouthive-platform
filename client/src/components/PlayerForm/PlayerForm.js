@@ -8,12 +8,12 @@ import PlayingStyles from './PlayingStyles';
 import Players from '../Players/Players';
 
 function PlayerForm() {
-  const [state, setState] = useState({
+  const [traits, setTrait] = useState({
     LongPassing: 5,
     ShortPassing: 5,
     BallControl: 5,
     Heading: 5,
-    WeakFoot: 5,
+    Dribbling: 5,
     Pressing: 5,
     LongShot: 5,
     Tackling: 5,
@@ -26,16 +26,16 @@ function PlayerForm() {
 
   function handleChange(evt) {
     const value = evt.target.value;
-    setState({
-      ...state,
+    setTrait({
+      ...traits,
       [evt.target.name]: value,
     });
   }
 
   function handleCheck(evt) {
     const value = evt.target.checked;
-    setState({
-      ...state,
+    setTrait({
+      ...traits,
       [evt.target.name]: value,
     });
   }
@@ -52,7 +52,7 @@ function PlayerForm() {
   const [Position, setPosition] = useState('');
 
   const values = {
-    ...state,
+    ...traits,
     Name,
     Nationality,
     Birthdate,

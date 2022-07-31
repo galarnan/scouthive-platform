@@ -47,7 +47,7 @@ function Search(props) {
 
   //function for multiselect inputs
   function handleChangemulti(field, evt, third) {
-    const value = evt.map((obj) => obj.value);
+    const value = evt.map(obj => obj.value);
     setFilters({
       ...filters,
       [field]: value,
@@ -55,18 +55,18 @@ function Search(props) {
   }
 
   let filteredplayers = players
-    .filter((player) => {
+    .filter(player => {
       return player.Name.toLowerCase().includes(filters.Name.toLowerCase());
     })
-    .filter((player) => {
+    .filter(player => {
       return filters.Feet.includes(player.Foot) || !filters.Feet.length;
     })
-    .filter((player) => {
+    .filter(player => {
       return (
         player.Position.includes(filters.Positions) || !filters.Positions.length
       );
     })
-    .filter((player) => {
+    .filter(player => {
       return player.Age >= filters.Ages[0] && player.Age <= filters.Ages[1];
     });
 
@@ -79,6 +79,10 @@ function Search(props) {
       max={40}
       min={13}
       name="Ages"
+      sx={{
+        width: 200,
+        color: 'white',
+      }}
     />
   );
 

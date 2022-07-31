@@ -1,36 +1,38 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function Signin(props) {
-  const [signInEmail, setEmail] = useState('');
-  const [signInPassword, setPassword] = useState('');
-
+function Register(props) {
   let navigate = useNavigate();
 
-  const onEmailChange = (event) => {
-    setEmail(event.target.value);
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+  const [name, setname] = useState('');
+
+  const onNameChange = event => {
+    setname(event.target.value);
   };
 
-  const onPasswordChange = (event) => {
-    setPassword(event.target.value);
+  const onEmailChange = event => {
+    setemail(event.target.value);
+  };
+
+  const onPasswordChange = event => {
+    setpassword(event.target.value);
   };
 
   const onSubmitSignIn = () => {
-    console.log(signInEmail, signInPassword);
-    fetch('http://localhost:3000/signin', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          console.log('signed in');
-          props.authentication(true);
+    axios
+      .post('/register', {
+        email: email,
+        password: password,
+        name: name,
+      })
+      .then(response => response.data)
+      .then(user => {
+        if (user.email) {
           window.localStorage.setItem('USER_ID', JSON.stringify(user.id));
+          props.authentication(true);
           navigate('/home', { replace: true });
         }
       });
@@ -41,13 +43,25 @@ function Signin(props) {
       <main className="pa4 black-80">
         <div className="measure">
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f1 fw6 ph0 mh0">Sign In</legend>
+            <legend className="f1 fw6 ph0 mh0">Register</legend>
+            <div className="mt3">
+              <label className="db fw6 lh-copy f6" htmlFor="name">
+                Name
+              </label>
+              <input
+                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                type="text"
+                name="name"
+                id="name"
+                onChange={onNameChange}
+              />
+            </div>
             <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="email-address">
                 Email
               </label>
               <input
-                className="pa2 input-reset ba bg-transparent hover-bg-black b--black-30 hover-white w-100"
+                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="email"
                 name="email-address"
                 id="email-address"
@@ -59,7 +73,7 @@ function Signin(props) {
                 Password
               </label>
               <input
-                className="b pa2 input-reset ba bg-transparent hover-bg-black b--black-30 hover-white w-100"
+                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                 type="password"
                 name="password"
                 id="password"
@@ -70,18 +84,10 @@ function Signin(props) {
           <div className="">
             <input
               onClick={onSubmitSignIn}
-              className="br3 b ph3 pv2 input-reset ba b--black-50 bg-transparent grow pointer f6 dib"
+              className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
-              value="Sign in"
+              value="Register"
             />
-          </div>
-          <div className="lh-copy mt3">
-            <p
-              onClick={() => navigate('/register')}
-              className="f6 link dim black db pointer"
-            >
-              Register
-            </p>
           </div>
         </div>
       </main>
@@ -89,4 +95,4 @@ function Signin(props) {
   );
 }
 
-export default Signin;
+export default Register;
