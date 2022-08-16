@@ -18,6 +18,10 @@ function BasicProfileDetails(props) {
     functions.setName(event.target.value);
   };
 
+  const onFootChange = event => {
+    functions.setFoot(event.target.value);
+  };
+
   const onNationalityChange = event => {
     functions.setNationality(event.target.value);
   };
@@ -173,13 +177,18 @@ function BasicProfileDetails(props) {
           </div>
           <div className="text-start my-4 vstack">
             <label>Strong foot</label>
-            <input
+            <select
+              className="form-select"
               value={values.Foot}
-              onChange={onNameChange}
-              type="text"
-              className="rounded p-1"
-              placeholder="Player's preffered foot"
-            ></input>
+              onChange={onFootChange}
+            >
+              <option disabled={true} value="">
+                Choose strong foot
+              </option>
+              <option value="right">right</option>
+              <option value="left">left</option>
+              <option value="both">both</option>
+            </select>
           </div>
           <div className="text-start my-4 vstack">
             <label>Agency</label>

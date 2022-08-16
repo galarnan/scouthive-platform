@@ -10,6 +10,7 @@ const SuggestedPlayers = props => {
   let reducedPlayerArray = [];
 
   players.forEach(player => {
+    if (!props.position.includes(player.Position)) return; //continue only if player is in relevant position
     console.log(player);
     //reducing player obj to relevant fields + new fields such as interestCounter and MatchingQualities(which will include all matching traits/roles)
     //second element in array is used for text color in classname (depending on if attribute is a match compared to request demands)
@@ -27,7 +28,7 @@ const SuggestedPlayers = props => {
       reducedPlayerObj['interestCounter']++;
       reducedPlayerObj['Age'] = [player['Age'], 'green'];
     }
-    if (props.feet.includes(player.Foot)) {
+    if (props.foot.includes(player.Foot)) {
       reducedPlayerObj['interestCounter']++;
       reducedPlayerObj['Foot'] = [player['Foot'], 'green'];
     }
@@ -41,6 +42,12 @@ const SuggestedPlayers = props => {
         reducedPlayerObj['MatchingQualities'].push(
           // eslint-disable-next-line prettier/prettier
           [`${trait}: ${player[trait]}`, 'green']
+        );
+      } else if (player[trait] === true) {
+        reducedPlayerObj['interestCounter']++;
+        reducedPlayerObj['MatchingQualities'].push(
+          // eslint-disable-next-line prettier/prettier
+            [`${trait}`, 'green']
         );
       } else {
         reducedPlayerObj['MatchingQualities'].push(

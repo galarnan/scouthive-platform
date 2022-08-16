@@ -1,0 +1,12 @@
+.vertical {
+  border-left: 2px solid gray;
+  height: 600px;
+  position:absolute;
+  left: 55%;
+}
+
+img {
+  width: 300px;
+  left: 67%;
+  position:absolute;
+}

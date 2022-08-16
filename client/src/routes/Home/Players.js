@@ -7,8 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPlayers } from './playersSlice';
 import Search from './Search';
 import axios from 'axios';
+import './Home.css';
+import ReactCountryFlag from 'react-country-flag';
+import { MDBIcon } from 'mdb-react-ui-kit';
 
-function Players(props) {
+function Players() {
   let navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -37,25 +40,40 @@ function Players(props) {
 
   const renderedPlayers = filteredplayers.map((player, key) => (
     <tr key={key}>
-      <td>
+      <td className="relative center">
+        {' '}
+        <ReactCountryFlag
+          style={{
+            width: '2.5em',
+            height: '2.5em',
+          }}
+          countryCode="US"
+          svg
+        />
+      </td>
+      <td style={{ paddingLeft: '2rem' }} className="w-30 text-start">
+        {player.Name}
+      </td>
+      <td>{player.Age}</td>
+      <td className="tdborder">{player.Foot[0].toUpperCase()}</td>
+      <td className="tdborder">{player.Club}</td>
+      <td className="tdborder">{player.Position}</td>
+      <td>{player.Nationality}</td>
+      <td className="w-20">
         <button
           type="button"
           onClick={() => fetch_playerdetails(player.playerID)}
-          className="btn btn-link"
+          className="btn btn-primary"
         >
-          {player.Name}
+          See details
         </button>
       </td>
-      <td>{player.Age}</td>
-      <td>{player.Foot}</td>
-      <td>{player.Club}</td>
-      <td>{player.Position}</td>
-      <td>{player.Nationality}</td>
     </tr>
   ));
 
   return (
     <div className="justify-content-center mx-5">
+      <MDBIcon flag="France" />
       <h1>Player List</h1>
       <Search setfilteredplayers={setfilteredplayers} />
       <button
@@ -74,18 +92,8 @@ function Players(props) {
       >
         + Add Player
       </button>
-      <table className="table table-light table-bordered align-middle">
-        <tbody>
-          <tr className="f6 table-dark p-5">
-            <th>Name</th>
-            <th>Age</th>
-            <th>Foot</th>
-            <th>Team</th>
-            <th>Position</th>
-            <th>Nationality</th>
-          </tr>
-          {renderedPlayers}
-        </tbody>
+      <table className="w-50 align-middle">
+        <tbody>{renderedPlayers}</tbody>
       </table>
     </div>
   );

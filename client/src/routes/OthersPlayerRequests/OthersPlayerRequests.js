@@ -32,7 +32,7 @@ const OthersPlayerRequests = () => {
           <div className="card w-40 mx-5 my-1" key={i}>
             <div className="card-body">
               <h5 className="card-subtitle mb-2 text-muted">
-                {`${request.Feet.slice(2, -2)} footed ${request.Positions.slice(2, -2)}`}
+                {`${request.Foot} footed ${request.Positions.slice(2, -2)}`}
               </h5>
               <h6 className="card-title">{`Posted by ${request.name} on ${request.Created.slice(0, 10)}`}</h6>
               <p></p>

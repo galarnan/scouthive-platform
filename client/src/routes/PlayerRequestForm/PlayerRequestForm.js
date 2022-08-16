@@ -11,28 +11,63 @@ const PlayerRequestForm = () => {
   const userid = window.localStorage.getItem('USER_ID');
   let navigate = useNavigate();
   const [MentalAttributes, setMentalAttributes] = useState({
-    Aggression: false,
     Composure: false,
     Leadership: false,
+    Vision: false,
+    DecisionMaking: false,
   });
 
   const [TechnicalAttributes, setTechnicalAttributes] = useState({
     Dribbling: false,
     Finishing: false,
     FirstTouch: false,
+    BallControl: false,
+    ShortPassing: false,
+    LongPassing: false,
+    FreekickTaking: false,
+  });
+
+  const [Roles, setRoles] = useState({
+    BoxtoBox: false,
+    JoinsAttack: false,
+    DeepLying: false,
+    BallPlayingCB: false,
+    NoNonsenseCB: false,
+    WingBack: false,
+    NoNonsenseFullBack: false,
+    InvertedFullBack: false,
+    AdvancedPlaymaker: false,
+    RoamingPlaymaker: false,
+    DefensiveWinger: false,
+    WidePlaymaker: false,
+    InvertedWinger: false,
+    TargetMan: false,
+    Poacher: false,
+    FalseNine: false,
   });
 
   const [PhysicalAttributes, setPhysicalAttributes] = useState({
     Pace: false,
     Stamina: false,
     Strength: false,
+    Tackling: false,
+    Aggression: false,
+    Heading: false,
   });
 
-  const [OtherDetails, setOtherDetaisl] = useState({
-    Feet: '',
+  const [OtherDetails, setOtherDetails] = useState({
+    Foot: 'irrelevant',
     Ages: [13, 40],
     Positions: [],
   });
+
+  function OnchangeRoles(evt) {
+    const value = evt.target.checked;
+    setRoles({
+      ...Roles,
+      [evt.target.name]: value,
+    });
+  }
 
   function OnchangeMental(evt) {
     const value = evt.target.checked;
@@ -62,7 +97,7 @@ const PlayerRequestForm = () => {
   function handleChangemulti(field, evt, third) {
     console.log(evt);
     const value = evt.map(obj => obj.value);
-    setOtherDetaisl({
+    setOtherDetails({
       ...OtherDetails,
       [field]: value,
     });
@@ -70,7 +105,7 @@ const PlayerRequestForm = () => {
 
   function handleSlider(evt) {
     const value = evt.target.value;
-    setOtherDetaisl({
+    setOtherDetails({
       ...OtherDetails,
       [evt.target.name]: value,
     });
@@ -78,7 +113,8 @@ const PlayerRequestForm = () => {
 
   const addtodb = () => {
     axios
-      .post('/createrequest', {
+      .post('/api/createrequest', {
+        ...Roles,
         ...MentalAttributes,
         ...PhysicalAttributes,
         ...TechnicalAttributes,
@@ -89,17 +125,11 @@ const PlayerRequestForm = () => {
       .then(response => response.data)
       .then(player => {
         if (player) {
-          navigate('/home', { replace: true });
+          navigate('/myplayerrequests', { replace: true });
         }
       })
       .catch(err => console.log(err));
   };
-
-  const feet = [
-    { value: 'right', label: 'right' },
-    { value: 'left', label: 'left' },
-    { value: 'both', label: 'both' },
-  ];
 
   const positions = [
     { value: 'Goalkeeper', label: 'Goalkeeper' },
@@ -131,86 +161,90 @@ const PlayerRequestForm = () => {
     />
   );
 
+  //creating array of FormControlLabel elements for all attributes (mental, technical and physical)
+
+  const mentalJsx = Object.entries(MentalAttributes).map(entry => {
+    return (
+      // eslint-disable-next-line react/jsx-key
+      <FormControlLabel
+        name={entry[0]}
+        onChange={OnchangeMental}
+        control={<Checkbox checked={entry[1]} />}
+        label={entry[0]}
+      />
+    );
+  });
+
+  const technicalJsx = Object.entries(TechnicalAttributes).map(entry => {
+    return (
+      // eslint-disable-next-line react/jsx-key
+      <FormControlLabel
+        name={entry[0]}
+        onChange={OnchangeTechnical}
+        control={<Checkbox checked={entry[1]} />}
+        label={entry[0]}
+      />
+    );
+  });
+
+  const physicalJsx = Object.entries(PhysicalAttributes).map(entry => {
+    return (
+      // eslint-disable-next-line react/jsx-key
+      <FormControlLabel
+        name={entry[0]}
+        onChange={OnchangePhysical}
+        control={<Checkbox checked={entry[1]} />}
+        label={entry[0]}
+      />
+    );
+  });
+
+  const rolesJsx = Object.entries(Roles).map(entry => {
+    return (
+      // eslint-disable-next-line react/jsx-key
+      <FormControlLabel
+        name={entry[0]}
+        onChange={OnchangeRoles}
+        control={<Checkbox checked={entry[1]} />}
+        label={entry[0]}
+      />
+    );
+  });
+
+  console.log(mentalJsx);
+
   return (
     <div className="row mx-3">
       <div className="col-sm">
         <h5 className="text-start">Mental Attributes</h5>
-        <FormGroup>
-          <FormControlLabel
-            name="Aggression"
-            onChange={OnchangeMental}
-            control={<Checkbox checked={MentalAttributes.Aggression} />}
-            label="Aggression"
-          />
-          <FormControlLabel
-            name="Composure"
-            onChange={OnchangeMental}
-            control={<Checkbox checked={MentalAttributes.Composure} />}
-            label="Composure"
-          />
-          <FormControlLabel
-            name="Leadership"
-            onChange={OnchangeMental}
-            control={<Checkbox checked={MentalAttributes.Leadership} />}
-            label="Leadership"
-          />
-        </FormGroup>
+        <FormGroup>{mentalJsx}</FormGroup>
       </div>
       <div className="col-sm">
         <h5 className="text-start">Technical Attributes</h5>
-        <FormGroup>
-          <FormControlLabel
-            name="Dribbling"
-            onChange={OnchangeTechnical}
-            control={<Checkbox checked={TechnicalAttributes.Dribbling} />}
-            label="Dribbling"
-          />
-          <FormControlLabel
-            name="Finishing"
-            onChange={OnchangeTechnical}
-            control={<Checkbox checked={TechnicalAttributes.Finishing} />}
-            label="Finishing"
-          />
-          <FormControlLabel
-            name="FirstTouch"
-            onChange={OnchangeTechnical}
-            control={<Checkbox checked={TechnicalAttributes.FirstTouch} />}
-            label="FirstTouch"
-          />
-        </FormGroup>
+        <FormGroup>{technicalJsx}</FormGroup>
       </div>
       <div className="col-sm">
         <h5 className="text-start">Physical Attributes</h5>
-        <FormGroup>
-          <FormControlLabel
-            name="Pace"
-            onChange={OnchangePhysical}
-            control={<Checkbox checked={PhysicalAttributes.Pace} />}
-            label="Pace"
-          />
-          <FormControlLabel
-            name="Stamina"
-            onChange={OnchangePhysical}
-            control={<Checkbox checked={PhysicalAttributes.Stamina} />}
-            label="Stamina"
-          />
-          <FormControlLabel
-            name="Strength"
-            onChange={OnchangePhysical}
-            control={<Checkbox checked={PhysicalAttributes.Strength} />}
-            label="Strength"
-          />
-        </FormGroup>
+        <FormGroup>{physicalJsx}</FormGroup>
+      </div>
+      <div className="col-sm">
+        <h5 className="text-start">Roles</h5>
+        <FormGroup>{rolesJsx}</FormGroup>
       </div>
       <div className="row mt-5">
-        <div className="col-md-4">
-          <Select
-            isMulti
-            onChange={handleChangemulti.bind(this, 'Feet')}
-            name="Feet"
-            options={feet}
-            placeholder="Strong foot"
-          />
+        <div className="text-start my-4 vstack">
+          <label>Strong foot</label>
+          <select
+            className="form-select"
+            value={OtherDetails.Foot}
+            onChange={handleSlider}
+            name="Foot"
+          >
+            <option value="irrelevant">irrelevant</option>
+            <option value="right">right</option>
+            <option value="left">left</option>
+            <option value="both">both</option>
+          </select>
         </div>
         <div className="col-md-4">
           <Select

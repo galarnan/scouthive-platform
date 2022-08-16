@@ -38,7 +38,7 @@ function PlayingStyles(props) {
   };
 
   const Position = pos => {
-    if (pos.includes('midfield')) {
+    if (pos.includes('Midfield')) {
       return (
         <FormGroup>
           <FormControlLabel
@@ -59,14 +59,130 @@ function PlayingStyles(props) {
             control={<Checkbox checked={values.JoinsAttack} />}
             label="Joins Attack"
           />
+          <FormControlLabel
+            name="RoamingPlaymaker"
+            onChange={Onchange}
+            control={<Checkbox checked={values.RoamingPlaymaker} />}
+            label="Roaming Playmaker"
+          />
         </FormGroup>
       );
-    } else if (pos.includes('attack')) {
-      return 'ATT';
-    } else if (pos.includes('Defender')) {
-      return 'DEF';
-    } else if (pos.includes('Goalkeeper')) {
-      return 'GK';
+    } else if (pos.includes('Back')) {
+      return (
+        <FormGroup>
+          <FormControlLabel
+            name="InvertedFullBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.InvertedFullBack} />}
+            label="Inverted FullBack"
+          />
+          <FormControlLabel
+            name="NoNonsenseFullBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.NoNonsenseFullBack} />}
+            label="No Nonsense FullBack"
+          />
+          <FormControlLabel
+            name="JoinsAttack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.JoinsAttack} />}
+            label="Joins Attack"
+          />
+          <FormControlLabel
+            name="WingBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.WingBack} />}
+            label="WingBack"
+          />
+        </FormGroup>
+      );
+    } else if (pos.includes('Winger')) {
+      return (
+        <FormGroup>
+          <FormControlLabel
+            name="WingBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.WingBack} />}
+            label="WingBack"
+          />
+          <FormControlLabel
+            name="DefensiveWinger"
+            onChange={Onchange}
+            control={<Checkbox checked={values.DefensiveWinger} />}
+            label="Defensive Winger"
+          />
+          <FormControlLabel
+            name="WidePlaymaker"
+            onChange={Onchange}
+            control={<Checkbox checked={values.WidePlaymaker} />}
+            label="Wide Playmaker"
+          />
+          <FormControlLabel
+            name="InvertedWinger"
+            onChange={Onchange}
+            control={<Checkbox checked={values.InvertedWinger} />}
+            label="Inverted Winger"
+          />
+        </FormGroup>
+      );
+    } else if (pos.includes('Back')) {
+      return (
+        <FormGroup>
+          <FormControlLabel
+            name="InvertedFullBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.InvertedFullBack} />}
+            label="Inverted FullBack"
+          />
+          <FormControlLabel
+            name="NoNonsenseFullBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.NoNonsenseFullBack} />}
+            label="No Nonsense FullBack"
+          />
+          <FormControlLabel
+            name="JoinsAttack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.JoinsAttack} />}
+            label="Joins Attack"
+          />
+          <FormControlLabel
+            name="WingBack"
+            onChange={Onchange}
+            control={<Checkbox checked={values.WingBack} />}
+            label="WingBack"
+          />
+        </FormGroup>
+      );
+    } else if (pos.includes('Forward')) {
+      return (
+        <FormGroup>
+          <FormControlLabel
+            name="TargetMan"
+            onChange={Onchange}
+            control={<Checkbox checked={values.TargetMan} />}
+            label="Target Man"
+          />
+          <FormControlLabel
+            name="Poacher"
+            onChange={Onchange}
+            control={<Checkbox checked={values.Poacher} />}
+            label="Poacher"
+          />
+          <FormControlLabel
+            name="WidePlaymaker"
+            onChange={Onchange}
+            control={<Checkbox checked={values.WidePlaymaker} />}
+            label="Wide Playmaker"
+          />
+          <FormControlLabel
+            name="FalseNine"
+            onChange={Onchange}
+            control={<Checkbox checked={values.FalseNine} />}
+            label="False Nine"
+          />
+        </FormGroup>
+      );
     }
   };
 

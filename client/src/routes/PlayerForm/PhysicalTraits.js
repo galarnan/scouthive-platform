@@ -65,6 +65,26 @@ function PhysicalTraits(props) {
             <label>Dribbling</label>
             {slide('Dribbling', values.Dribbling)}
           </div>
+          <div className="input-group gap-3">
+            <label>Composure</label>
+            {slide('Composure', values.Composure)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Leadership</label>
+            {slide('Leadership', values.Leadership)}
+          </div>
+          <div className="input-group gap-3">
+            <label>First Touch</label>
+            {slide('FirstTouch', values.FirstTouch)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Pace</label>
+            {slide('Pace', values.Pace)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Stamina</label>
+            {slide('Stamina', values.Stamina)}
+          </div>
         </div>
         <div className="mt-5 input-group mx-3 col-sm gap-5">
           <div className="input-group gap-3">
@@ -86,6 +106,26 @@ function PhysicalTraits(props) {
           <div className="input-group gap-3">
             <label>Finishing</label>
             {slide('Finishing', values.Finishing)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Strength</label>
+            {slide('Strength', values.Strength)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Decision Making</label>
+            {slide('DecisionMaking', values.DecisionMaking)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Work Rate</label>
+            {slide('WorkRate', values.WorkRate)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Vision</label>
+            {slide('Vision', values.Vision)}
+          </div>
+          <div className="input-group gap-3">
+            <label>Freekick Taking</label>
+            {slide('FreekickTaking', values.FreekickTaking)}
           </div>
         </div>
       </div>
