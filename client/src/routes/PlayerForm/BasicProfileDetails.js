@@ -34,6 +34,10 @@ function BasicProfileDetails(props) {
     functions.setAge(event.target.value);
   };
 
+  const onAgencyChange = event => {
+    functions.setAgency(event.target.value);
+  };
+
   const onClubChange = event => {
     functions.setClub(event.target.value);
   };
@@ -51,6 +55,19 @@ function BasicProfileDetails(props) {
     functions.nextStep();
   };
 
+  const convertPositionText = longText => {
+    let shortText = longText.slice(longText.indexOf('-') + 2);
+    //change position text to abbreviation (eg. Central Midfield => CM)
+    const hasDash = shortText.includes('-'); // char before second capital is either '-' or ' '
+    console.log({ shortText, longText, hasDash });
+    if (hasDash) {
+      shortText = shortText[0] + shortText[shortText.indexOf('-') + 1];
+    } else {
+      shortText = shortText[0] + shortText[shortText.indexOf(' ') + 1];
+    }
+    return shortText;
+  };
+
   const onSubmitURL = () => {
     setLoading(true);
     axios
@@ -64,18 +81,18 @@ function BasicProfileDetails(props) {
           console.log(data);
           functions.setName(data[data.length - 1]);
           functions.setAge(data[2]);
-          functions.setNationality(data[4]);
+          functions.setNationality(data[4].split('\u00a0')[0]); //keep only first nationality, split by inivisable space!
           functions.setClub(data[8]);
-          functions.setPosition(data[5].slice(data[5].indexOf('-') + 2));
+          functions.setPosition(convertPositionText(data[5]));
           functions.setFoot(data[6]);
           functions.setAgency(data[7]);
         } else {
           console.log(data);
           functions.setName(data[data.length - 1]);
           functions.setAge(data[3]);
-          functions.setNationality(data[5]);
+          functions.setNationality(data[5].split('\u00a0')[0]);
           functions.setClub(data[9]);
-          functions.setPosition(data[6].slice(data[6].indexOf('-') + 2));
+          functions.setPosition(convertPositionText(data[6]));
           functions.setFoot(data[7]);
           functions.setAgency(data[8]);
         }
@@ -194,7 +211,7 @@ function BasicProfileDetails(props) {
             <label>Agency</label>
             <input
               value={values.Agency}
-              onChange={onNameChange}
+              onChange={onAgencyChange}
               type="text"
               className="rounded p-1"
               placeholder="Player's position"

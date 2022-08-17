@@ -38,7 +38,7 @@ function PlayingStyles(props) {
   };
 
   const Position = pos => {
-    if (pos.includes('Midfield')) {
+    if (pos === 'CM' || pos === 'DM' || pos === 'AM') {
       return (
         <FormGroup>
           <FormControlLabel
@@ -67,7 +67,7 @@ function PlayingStyles(props) {
           />
         </FormGroup>
       );
-    } else if (pos.includes('Back')) {
+    } else if (pos === 'RB' || pos === 'LB') {
       return (
         <FormGroup>
           <FormControlLabel
@@ -96,7 +96,7 @@ function PlayingStyles(props) {
           />
         </FormGroup>
       );
-    } else if (pos.includes('Winger')) {
+    } else if (pos === 'LW' || pos === 'RW') {
       return (
         <FormGroup>
           <FormControlLabel
@@ -125,20 +125,20 @@ function PlayingStyles(props) {
           />
         </FormGroup>
       );
-    } else if (pos.includes('Back')) {
+    } else if (pos === 'CB') {
       return (
         <FormGroup>
           <FormControlLabel
-            name="InvertedFullBack"
+            name="BallPlayingCB"
             onChange={Onchange}
-            control={<Checkbox checked={values.InvertedFullBack} />}
-            label="Inverted FullBack"
+            control={<Checkbox checked={values.BallPlayingCB} />}
+            label="Ball Playing Centre-back"
           />
           <FormControlLabel
-            name="NoNonsenseFullBack"
+            name="NoNonsenseCB"
             onChange={Onchange}
-            control={<Checkbox checked={values.NoNonsenseFullBack} />}
-            label="No Nonsense FullBack"
+            control={<Checkbox checked={values.NoNonsenseCB} />}
+            label="No Nonsense Centre-back"
           />
           <FormControlLabel
             name="JoinsAttack"
@@ -146,15 +146,9 @@ function PlayingStyles(props) {
             control={<Checkbox checked={values.JoinsAttack} />}
             label="Joins Attack"
           />
-          <FormControlLabel
-            name="WingBack"
-            onChange={Onchange}
-            control={<Checkbox checked={values.WingBack} />}
-            label="WingBack"
-          />
         </FormGroup>
       );
-    } else if (pos.includes('Forward')) {
+    } else if (pos === 'CF' || pos === 'SS') {
       return (
         <FormGroup>
           <FormControlLabel

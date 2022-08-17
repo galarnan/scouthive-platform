@@ -17,7 +17,7 @@ table {
   box-shadow: 0px 0px 5px #CDCDCD;
   font-family: 'Quicksand', cursive;
   font-weight: 500;
-
+  font-size:0.75rem;
 }
 
 /* .tdborder {
@@ -25,5 +25,20 @@ table {
   border-left: 1px #CDCDCD;
 } */
 
+h5 {
+  font-family: 'Quicksand', cursive;
+  font-weight: 600;
+}
+
+.flag {
+  top: 38%;
+  left: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+button {
+  font-size:0.5rem;
+}
 
 
