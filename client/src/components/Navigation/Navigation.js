@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../routes/Home/playersSlice';
+import Logo from '../Logo/Logo';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'tachyons';
@@ -13,19 +14,21 @@ const Navigation = props => {
   if (props.isSignedIn) {
     return (
       <nav
-        className="p-4"
+        className="f5 p-4 pb-0"
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
           color: '#4D4D4D',
           fontWeight: 600,
+          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
         }}
       >
+        <Logo className="pa3" />
         <p
           onClick={() => {
             navigate('/home');
           }}
-          className={`f4 link dim pa3 pointer ${
+          className={`link dim pa3 pointer ${
             location === 'home' ? 'blue fw-bold' : ''
           }`}
         >
@@ -35,7 +38,7 @@ const Navigation = props => {
           onClick={() => {
             navigate('/connections');
           }}
-          className={`f4 link dim pa3 pointer ${
+          className={`link dim pa3 pointer ${
             location === 'connections' ? 'blue fw-bold' : ''
           }`}
         >
@@ -45,7 +48,7 @@ const Navigation = props => {
           onClick={() => {
             navigate('/playerrequests');
           }}
-          className={`f4 link dim pa3 pointer ${
+          className={`link dim pa3 pointer ${
             location === 'playerrequests' ? 'blue fw-bold' : ''
           }`}
         >
@@ -55,7 +58,7 @@ const Navigation = props => {
           onClick={() => {
             navigate('/myplayerrequests');
           }}
-          className={`f4 link dim pa3 pointer ${
+          className={`link dim pa3 pointer ${
             location === 'myplayerrequests' ? 'blue fw-bold' : ''
           }`}
         >
@@ -67,7 +70,7 @@ const Navigation = props => {
             navigate('/');
             props.authentication(false);
           }}
-          className="f4 link dim pa3 pointer"
+          className="link dim pa3 pointer"
         >
           Sign Out
         </p>

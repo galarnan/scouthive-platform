@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Logo />
+        {/* <Logo /> */}
         <Navigation authentication={authentication} isSignedIn={isSignedIn} />
         <Routes>
           <Route

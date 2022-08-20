@@ -42,27 +42,27 @@ function PlayingStyles(props) {
       return (
         <FormGroup>
           <FormControlLabel
-            name="BoxtoBox"
+            name="Box to Box"
             onChange={Onchange}
-            control={<Checkbox checked={values.BoxtoBox} />}
+            control={<Checkbox checked={values['Box to Box']} />}
             label="Box-to-Box"
           />
           <FormControlLabel
-            name="DeepLying"
+            name="Deep Lying"
             onChange={Onchange}
-            control={<Checkbox checked={values.DeepLying} />}
+            control={<Checkbox checked={values['Deep Lying']} />}
             label="Deep Lying"
           />
           <FormControlLabel
-            name="JoinsAttack"
+            name="Joins Attack"
             onChange={Onchange}
-            control={<Checkbox checked={values.JoinsAttack} />}
+            control={<Checkbox checked={values['Joins Attack']} />}
             label="Joins Attack"
           />
           <FormControlLabel
-            name="RoamingPlaymaker"
+            name="Roaming Playmaker"
             onChange={Onchange}
-            control={<Checkbox checked={values.RoamingPlaymaker} />}
+            control={<Checkbox checked={values['Roaming Playmaker']} />}
             label="Roaming Playmaker"
           />
         </FormGroup>
@@ -71,28 +71,28 @@ function PlayingStyles(props) {
       return (
         <FormGroup>
           <FormControlLabel
-            name="InvertedFullBack"
+            name="Inverted FullBack"
             onChange={Onchange}
-            control={<Checkbox checked={values.InvertedFullBack} />}
+            control={<Checkbox checked={values['Inverted FullBack']} />}
             label="Inverted FullBack"
           />
           <FormControlLabel
-            name="NoNonsenseFullBack"
+            name="No Nonsense FullBack"
             onChange={Onchange}
-            control={<Checkbox checked={values.NoNonsenseFullBack} />}
+            control={<Checkbox checked={values['No Nonsense FullBack']} />}
             label="No Nonsense FullBack"
           />
           <FormControlLabel
             name="JoinsAttack"
             onChange={Onchange}
-            control={<Checkbox checked={values.JoinsAttack} />}
+            control={<Checkbox checked={values['Joins Attack']} />}
             label="Joins Attack"
           />
           <FormControlLabel
-            name="WingBack"
+            name="Wing Back"
             onChange={Onchange}
-            control={<Checkbox checked={values.WingBack} />}
-            label="WingBack"
+            control={<Checkbox checked={values['Wing  Back']} />}
+            label="Wing Back"
           />
         </FormGroup>
       );
@@ -100,27 +100,27 @@ function PlayingStyles(props) {
       return (
         <FormGroup>
           <FormControlLabel
-            name="WingBack"
+            name="Wing Back"
             onChange={Onchange}
-            control={<Checkbox checked={values.WingBack} />}
-            label="WingBack"
+            control={<Checkbox checked={values['Wing Back']} />}
+            label="Wing Back"
           />
           <FormControlLabel
-            name="DefensiveWinger"
+            name="Defensive Winger"
             onChange={Onchange}
-            control={<Checkbox checked={values.DefensiveWinger} />}
+            control={<Checkbox checked={values['Defensive Winger']} />}
             label="Defensive Winger"
           />
           <FormControlLabel
-            name="WidePlaymaker"
+            name="Wide Playmaker"
             onChange={Onchange}
-            control={<Checkbox checked={values.WidePlaymaker} />}
+            control={<Checkbox checked={values['Wide Playmaker']} />}
             label="Wide Playmaker"
           />
           <FormControlLabel
-            name="InvertedWinger"
+            name="Inverted Winger"
             onChange={Onchange}
-            control={<Checkbox checked={values.InvertedWinger} />}
+            control={<Checkbox checked={values['Inverted Winger']} />}
             label="Inverted Winger"
           />
         </FormGroup>
@@ -129,21 +129,21 @@ function PlayingStyles(props) {
       return (
         <FormGroup>
           <FormControlLabel
-            name="BallPlayingCB"
+            name="Ball Playing CB"
             onChange={Onchange}
-            control={<Checkbox checked={values.BallPlayingCB} />}
+            control={<Checkbox checked={values['Ball Playing CB']} />}
             label="Ball Playing Centre-back"
           />
           <FormControlLabel
-            name="NoNonsenseCB"
+            name="No Nonsense CB"
             onChange={Onchange}
-            control={<Checkbox checked={values.NoNonsenseCB} />}
+            control={<Checkbox checked={values['No Nonsense CB']} />}
             label="No Nonsense Centre-back"
           />
           <FormControlLabel
-            name="JoinsAttack"
+            name="Joins Attack"
             onChange={Onchange}
-            control={<Checkbox checked={values.JoinsAttack} />}
+            control={<Checkbox checked={values['Joins Attack']} />}
             label="Joins Attack"
           />
         </FormGroup>
@@ -152,27 +152,27 @@ function PlayingStyles(props) {
       return (
         <FormGroup>
           <FormControlLabel
-            name="TargetMan"
+            name="Target Man"
             onChange={Onchange}
-            control={<Checkbox checked={values.TargetMan} />}
+            control={<Checkbox checked={values['Target Man']} />}
             label="Target Man"
           />
           <FormControlLabel
             name="Poacher"
             onChange={Onchange}
-            control={<Checkbox checked={values.Poacher} />}
+            control={<Checkbox checked={values['Poacher']} />}
             label="Poacher"
           />
           <FormControlLabel
-            name="WidePlaymaker"
+            name="Wide Playmaker"
             onChange={Onchange}
-            control={<Checkbox checked={values.WidePlaymaker} />}
+            control={<Checkbox checked={values['Wide Playmaker']} />}
             label="Wide Playmaker"
           />
           <FormControlLabel
-            name="FalseNine"
+            name="False Nine"
             onChange={Onchange}
-            control={<Checkbox checked={values.FalseNine} />}
+            control={<Checkbox checked={values['False Nine']} />}
             label="False Nine"
           />
         </FormGroup>

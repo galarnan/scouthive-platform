@@ -86,7 +86,7 @@ function Players() {
         onClick={() => {
           navigate('/addplayer');
         }}
-        className="f5 link dim pointer blue fw-bold text-start mt-1 "
+        className="f6 link dim pointer blue fw-bold text-start mt-1 "
       >
         Add player
       </p>

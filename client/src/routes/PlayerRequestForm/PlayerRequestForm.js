@@ -11,48 +11,48 @@ const PlayerRequestForm = () => {
   const userid = window.localStorage.getItem('USER_ID');
   let navigate = useNavigate();
   const [MentalAttributes, setMentalAttributes] = useState({
-    Composure: false,
-    Leadership: false,
-    Vision: false,
-    DecisionMaking: false,
+    'Composure': false,
+    'Leadership': false,
+    'Vision': false,
+    'Decision Making': false,
   });
 
   const [TechnicalAttributes, setTechnicalAttributes] = useState({
-    Dribbling: false,
-    Finishing: false,
-    FirstTouch: false,
-    BallControl: false,
-    ShortPassing: false,
-    LongPassing: false,
-    FreekickTaking: false,
+    'Dribbling': false,
+    'Finishing': false,
+    'First Touch': false,
+    'Ball Control': false,
+    'Short Passing': false,
+    'Long Passing': false,
+    'Freekick Taking': false,
   });
 
   const [Roles, setRoles] = useState({
-    BoxtoBox: false,
-    JoinsAttack: false,
-    DeepLying: false,
-    BallPlayingCB: false,
-    NoNonsenseCB: false,
-    WingBack: false,
-    NoNonsenseFullBack: false,
-    InvertedFullBack: false,
-    AdvancedPlaymaker: false,
-    RoamingPlaymaker: false,
-    DefensiveWinger: false,
-    WidePlaymaker: false,
-    InvertedWinger: false,
-    TargetMan: false,
-    Poacher: false,
-    FalseNine: false,
+    'Box to Box': false,
+    'Joins Attack': false,
+    'Deep Lying': false,
+    'Ball Playing CB': false,
+    'No Nonsense CB': false,
+    'Wing Back': false,
+    'No Nonsense FullBack': false,
+    'Inverted FullBack': false,
+    'Advanced Playmaker': false,
+    'Roaming Playmaker': false,
+    'Defensive Winger': false,
+    'Wide Playmaker': false,
+    'Inverted Winger': false,
+    'Target Man': false,
+    'Poacher': false,
+    'False Nine': false,
   });
 
   const [PhysicalAttributes, setPhysicalAttributes] = useState({
-    Pace: false,
-    Stamina: false,
-    Strength: false,
-    Tackling: false,
-    Aggression: false,
-    Heading: false,
+    'Pace': false,
+    'Stamina': false,
+    'Strength': false,
+    'Tackling': false,
+    'Aggression': false,
+    'Heading': false,
   });
 
   const [OtherDetails, setOtherDetails] = useState({
