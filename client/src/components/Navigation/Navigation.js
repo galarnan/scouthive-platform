@@ -1,20 +1,46 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../routes/Home/playersSlice';
+import Logo from '../Logo/Logo';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'tachyons';
 
 const Navigation = props => {
+  let location = useLocation().pathname.slice(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(`issgined in props in navigation is ${props.isSignedIn}`);
   if (props.isSignedIn) {
     return (
-      <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <nav
+        className="f5 p-4 pb-0"
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          color: '#4D4D4D',
+          fontWeight: 600,
+          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+        }}
+      >
+        <Logo className="pa3" />
+        <p
+          onClick={() => {
+            navigate('/home');
+          }}
+          className={`link dim pa3 pointer ${
+            location === 'home' ? 'blue fw-bold' : ''
+          }`}
+        >
+          Home
+        </p>
         <p
           onClick={() => {
             navigate('/connections');
           }}
-          className="f3 link dim black underline pa3 pointer"
+          className={`link dim pa3 pointer ${
+            location === 'connections' ? 'blue fw-bold' : ''
+          }`}
         >
           Connections
         </p>
@@ -22,7 +48,9 @@ const Navigation = props => {
           onClick={() => {
             navigate('/playerrequests');
           }}
-          className="f3 link dim black underline pa3 pointer"
+          className={`link dim pa3 pointer ${
+            location === 'playerrequests' ? 'blue fw-bold' : ''
+          }`}
         >
           Player Requests
         </p>
@@ -30,7 +58,9 @@ const Navigation = props => {
           onClick={() => {
             navigate('/myplayerrequests');
           }}
-          className="f3 link dim black underline pa3 pointer"
+          className={`link dim pa3 pointer ${
+            location === 'myplayerrequests' ? 'blue fw-bold' : ''
+          }`}
         >
           My Requests
         </p>
@@ -40,29 +70,15 @@ const Navigation = props => {
             navigate('/');
             props.authentication(false);
           }}
-          className="f3 link dim black underline pa3 pointer"
+          className="link dim pa3 pointer"
         >
           Sign Out
         </p>
       </nav>
     );
   } else {
-    return (
-      <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <p
-          onClick={() => navigate('/')}
-          className="f3 link dim black underline pa3 pointer"
-        >
-          Sign In
-        </p>
-        <p
-          onClick={() => navigate('/register')}
-          className="f3 link dim black underline pa3 pointer"
-        >
-          Register
-        </p>
-      </nav>
-    );
+    //navbar empty if logged out, div needed to keep proportions of html
+    return <div style={{ height: 120 }}></div>;
   }
 };
 

@@ -1,5 +1,9 @@
 .App {
-  text-align: center; 
+  text-align: center;
+}
+
+.gray {
+  color: #474747;
 }
 
 /* .bg-image{

@@ -19,21 +19,15 @@ import CreateRequest from './routes/PlayerRequestForm/PlayerRequestForm';
 import PlayerRequests from './routes/OthersPlayerRequests/OthersPlayerRequests';
 import PlayerRequestDetails from './routes/PlayerRequestPage/ViewRequestDetails';
 import MyPlayerRequests from './routes/MyPlayerRequests/MyPlayerRequests';
+import Logo from './components/Logo/Logo';
 
 import PrivateOutlet from './components/PrivateRoute/PrivateOutlet';
 
 function App() {
   const [isSignedIn, setisSignedIn] = useState(false);
-  const [user, setUser] = useState({
-    id: '',
-    name: '',
-    email: '',
-    joined: '',
-  });
 
   const clearState = () => {
     setisSignedIn(false);
-    setUser({});
     window.localStorage.removeItem('USER_ID');
     window.localStorage.removeItem('ACCESS_TOKEN');
   };
@@ -62,18 +56,31 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        {/* <Logo /> */}
         <Navigation authentication={authentication} isSignedIn={isSignedIn} />
         <Routes>
           <Route
             path="/"
-            element={<Signin authentication={authentication} />}
+            element={
+              isSignedIn ? ( //if user is already logged in direct to home page
+                <Navigate to="/home" replace />
+              ) : (
+                <Signin authentication={authentication} />
+              )
+            }
           />
           <Route
             path="/register"
-            element={<Register authentication={authentication} />}
+            element={
+              isSignedIn ? ( //if user is already logged in direct to home page
+                <Navigate to="/home" replace />
+              ) : (
+                <Register authentication={authentication} />
+              )
+            }
           />
           <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<Players userid={user.id} />} />
+            <Route path="/home" element={<Players />} />
             <Route path="/playerdetails" element={<PlayerDetails />} />
             <Route path="/addplayer" element={<PlayerForm />} />
             <Route path="/createrequest" element={<CreateRequest />} />

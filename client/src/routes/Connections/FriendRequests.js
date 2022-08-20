@@ -37,7 +37,7 @@ const FriendRequests = () => {
           <div className="card w-40 mx-5 my-1" key={i}>
             <div className="card-body">
               <h5 className="card-title">{request.name}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Agent/Scout</h6>
+              <h6 className="card-subtitle mb-2 text-muted">{request.type}</h6>
               <button
                 type="button"
                 className="btn btn-light"

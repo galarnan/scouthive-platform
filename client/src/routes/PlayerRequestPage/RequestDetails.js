@@ -10,7 +10,7 @@ const RequestDetails = () => {
   const firstage = details['Ages'].slice(2, 4);
   const secondage = details['Ages'].slice(7, 9);
   const agerange = `${firstage}-${secondage}`;
-  const feet = details['Feet'].slice(2, -2);
+  const foot = details['Foot'];
   const position = details['Positions'].slice(2, -2);
   const datecreated = details['Created'].slice(0, 10);
 
@@ -31,7 +31,7 @@ const RequestDetails = () => {
       <div className="justify-content-md-center d-flex">
         <div className="row w-70 mb-auto border">
           <div className="d-flex justify-content-md-center d-flex gap-5 p-3">
-            <p className="my-auto">Strong foot: {feet}</p>
+            <p className="my-auto">Strong foot: {foot}</p>
             <p className="my-auto">Positions: {position}</p>
             <p className="my-auto">Ages: {agerange}</p>
             <p className="my-auto">Date created: {datecreated}</p>
@@ -47,7 +47,7 @@ const RequestDetails = () => {
         firstage={firstage}
         secondage={secondage}
         position={position}
-        feet={feet}
+        foot={foot}
         traits={traits}
       />
     </div>

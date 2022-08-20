@@ -6,7 +6,7 @@ const handlePullFriendRequests = (req, res, db) => {
     .then(
       (SendingUser) => {
         const ids = SendingUser.map((user) => user.user_sent);
-        db.select('name', 'id').from('users')
+        db.select('name', 'id', 'type').from('users')
           .whereIn('id', ids).then((results) => res.json(results));
       },
     );

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Signin.css';
+import image from './footballimage.png';
 
 function Signin(props) {
   const [signInEmail, setEmail] = useState('');
@@ -39,6 +42,7 @@ function Signin(props) {
           );
           console.log(`user token from login ${user.Token}`);
           axios.defaults.headers.common['Authorization'] = user.Token;
+          history.replaceState(null, '', 'home'); // user cannot go back to signin on back button
           navigate('/home');
         }
       })
@@ -49,58 +53,67 @@ function Signin(props) {
   };
 
   return (
-    <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-      <main className="pa4 black-80">
-        <div className="measure">
-          <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f1 fw6 ph0 mh0">Sign In</legend>
-            <div className="mt3">
-              <label className="db fw6 lh-copy f6" htmlFor="email-address">
-                Email
-              </label>
-              <input
-                className="pa2 input-reset ba bg-transparent hover-bg-black b--black-30 hover-white w-100"
-                type="email"
-                name="email-address"
-                id="email-address"
-                onChange={onEmailChange}
-              />
-            </div>
-            <div className="mv3">
-              <label className="db fw6 lh-copy f6" htmlFor="password">
-                Password
-              </label>
-              <input
-                className="b pa2 input-reset ba bg-transparent hover-bg-black b--black-30 hover-white w-100"
-                type="password"
-                name="password"
-                id="password"
-                onChange={onPasswordChange}
-              />
-            </div>
-          </fieldset>
-          <p className="text red">
-            {authError ? 'Incorrect email or password' : ''}
-          </p>
-          <div className="">
-            <input
-              onClick={onSubmitSignIn}
-              className="br3 b ph3 pv2 input-reset ba b--black-50 bg-transparent grow pointer f6 dib"
-              type="submit"
-              value="Sign in"
-            />
+    <div className="d-flex align-items-center justify-content-start container">
+      <div className="align-items-center col-md-6">
+        <main className="mt-5 d-flex justify-content-center align-items-center">
+          <div>
+            <fieldset id="sign_up" className="text-start b--transparent">
+              <h1 className="m-0 font-weight-bold fs-1">Welcome back</h1>
+              <p className="gray mt-1 fs-5"> Please enter your details</p>
+              <div className="mt-1">
+                <label
+                  className="gray db fw6 lh-copy fs-5"
+                  htmlFor="email-address"
+                >
+                  Email
+                </label>
+                <input
+                  className="rounded pa2 input-reset ba bg-transparent hover-bg-black b--black-30 w-100"
+                  type="email"
+                  name="email-address"
+                  id="email-address"
+                  onChange={onEmailChange}
+                />
+              </div>
+              <div className="gray mv3">
+                <label className="db fw6 lh-copy fs-5" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  className="rounded b pa2 input-reset ba bg-transparent hover-bg-black b--black-30 w-100"
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={onPasswordChange}
+                />
+              </div>
+              <div>
+                <input
+                  onClick={onSubmitSignIn}
+                  className="bg-primary text-white rounded b pv2 input-reset ba b--black-50 grow fs-6 w-100"
+                  type="submit"
+                  value="SIGN IN"
+                />
+              </div>
+              <div className="lh-copy mt1">
+                <p className="text-end f6 gray db ">
+                  Don&apos;t have an account?&nbsp;&nbsp;
+                  <Link to="/register">SIGN UP</Link>
+                </p>
+              </div>
+            </fieldset>
+
+            {authError ? (
+              <p className="text red"> Incorrect email or password </p>
+            ) : (
+              ''
+            )}
           </div>
-          <div className="lh-copy mt3">
-            <p
-              onClick={() => navigate('/register')}
-              className="f6 link dim black db pointer"
-            >
-              Register
-            </p>
-          </div>
-        </div>
-      </main>
-    </article>
+          <div className="vertical"></div>
+        </main>
+      </div>
+      <img src={image} />
+    </div>
   );
 }
 

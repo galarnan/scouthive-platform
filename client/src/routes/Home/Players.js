@@ -7,8 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPlayers } from './playersSlice';
 import Search from './Search';
 import axios from 'axios';
+import './Home.css';
+import ReactCountryFlag from 'react-country-flag';
+import countries from './countries';
 
-function Players(props) {
+function Players() {
   let navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -37,26 +40,35 @@ function Players(props) {
 
   const renderedPlayers = filteredplayers.map((player, key) => (
     <tr key={key}>
-      <td>
-        <button
-          type="button"
-          onClick={() => fetch_playerdetails(player.playerID)}
-          className="btn btn-link"
-        >
-          {player.Name}
-        </button>
+      <td className="relative">
+        <ReactCountryFlag
+          className="flag"
+          countryCode={countries[player.Nationality]}
+          svg
+        />
+      </td>
+      <td style={{ paddingLeft: '1.5rem' }} className="w-30 text-start">
+        {player.Name}
       </td>
       <td>{player.Age}</td>
-      <td>{player.Foot}</td>
+      <td>{player.Foot[0].toUpperCase()}</td>
       <td>{player.Club}</td>
       <td>{player.Position}</td>
       <td>{player.Nationality}</td>
+      <td className="w-20">
+        <button
+          type="button"
+          onClick={() => fetch_playerdetails(player.playerID)}
+          className="btn btn-primary btn-sm"
+        >
+          See details
+        </button>
+      </td>
     </tr>
   ));
 
   return (
     <div className="justify-content-center mx-5">
-      <h1>Player List</h1>
       <Search setfilteredplayers={setfilteredplayers} />
       <button
         onClick={() => navigate('/createrequest')}
@@ -66,27 +78,18 @@ function Players(props) {
       >
         + Create Request
       </button>
-      <button
-        onClick={() => navigate('/addplayer')}
-        type="button"
-        className="btn btn-primary d-flex align-start-left mt-4"
-        data-mdb-ripple-unbound="true"
-      >
-        + Add Player
-      </button>
-      <table className="table table-light table-bordered align-middle">
-        <tbody>
-          <tr className="f6 table-dark p-5">
-            <th>Name</th>
-            <th>Age</th>
-            <th>Foot</th>
-            <th>Team</th>
-            <th>Position</th>
-            <th>Nationality</th>
-          </tr>
-          {renderedPlayers}
-        </tbody>
+      <h5 className="text-start bold mt-4">My players</h5>
+      <table className="w-50 align-middle">
+        <tbody>{renderedPlayers}</tbody>
       </table>
+      <p
+        onClick={() => {
+          navigate('/addplayer');
+        }}
+        className="f6 link dim pointer blue fw-bold text-start mt-1 "
+      >
+        Add player
+      </p>
     </div>
   );
 }
