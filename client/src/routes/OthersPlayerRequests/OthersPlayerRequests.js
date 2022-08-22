@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/OthersPlayerRequests.css';
 import axios from 'axios';
-import Sidebar from './Sidebar';
-import RequestSummary from './RequestSummary';
+import Sidebar from './components/Sidebar';
+import RequestSummary from './components/RequestSummary';
 import RoleOrAttribute from '../../components/RolesOrAttribute';
 import FilterBar from './components/FilterBar';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import RoleOrAttribute from '../../components/RolesOrAttribute';
-import './css/SideBar.css';
+import RoleOrAttribute from '../../../components/RolesOrAttribute';
+import '../css/SideBar.css';
 
 // const getRoles = traits => {
 //   const Roles = traits.filter(trait => {

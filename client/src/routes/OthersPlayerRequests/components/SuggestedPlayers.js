@@ -5,37 +5,59 @@ import ReactCountryFlag from 'react-country-flag';
 import countries from '../../Home/countries';
 import '../css/OthersPlayerRequests.css';
 import 'tachyons';
+import axios from 'axios';
+
+//function that filters out roles from traits
+const getRoles = Player => {
+  if (Player) {
+    const Roles = Object.keys(Player).reduce((arr, k) => {
+      if (Player[k] === true) {
+        arr.push(k);
+      }
+      return arr;
+    }, []);
+    return Roles;
+  }
+};
+
+const convertPositionText = position => {
+  //change position text to abbreviation (eg. Central Midfield => CM or Right-Back => RB)
+  const hasDash = position.includes('-'); // char before second capital is either '-' or ' '
+  if (hasDash) {
+    position = position[0] + position[position.indexOf('-') + 1];
+  } else {
+    position = position[0] + position[position.indexOf(' ') + 1];
+  }
+  return position;
+};
+
+const sendplayer = (requestID, playerID, userID, e) => {
+  console.log({requestID, playerID, userID})
+  axios
+    .post('/api/sendplayer', {
+      requestID,
+      playerID,
+      userID,
+    })
+    .then(response => {
+      if (response.data) {
+        e.target.className = 'btn btn-success disabled';
+        e.target.innerHTML = 'Sent';
+      }
+    });
+};
+
+const checkIfSent = (requestID, playerID, userID)  = {
+
+}
 
 const SuggestedPlayers = props => {
   const players = useSelector(selectAllPlayers);
   let reducedPlayerArray = [];
 
-  //function that filters out roles from traits
-  const getRoles = Player => {
-    if (Player) {
-      const Roles = Object.keys(Player).reduce((arr, k) => {
-        if (Player[k] === true) {
-          arr.push(k);
-        }
-        return arr;
-      }, []);
-      return Roles;
-    }
-  };
-
-  const convertPositionText = position => {
-    //change position text to abbreviation (eg. Central Midfield => CM)
-    const hasDash = position.includes('-'); // char before second capital is either '-' or ' '
-    if (hasDash) {
-      position = position[0] + position[position.indexOf('-') + 1];
-    } else {
-      position = position[0] + position[position.indexOf(' ') + 1];
-    }
-    return position;
-  };
-
-  //continue only if player is in relevant position,
   players.forEach(player => {
+    console.log(player)
+    //continue only if player is in relevant position,
     if (
       !props.position.includes(player.Position[0]) || //Player.Position[0/1] refer to abbreviation
       !props.position.includes(player.Position[1])
@@ -53,6 +75,7 @@ const SuggestedPlayers = props => {
       Roles: [],
       interestCounter: 0,
       playerID: player['playerID'],
+      userID: player['userid'],
     };
     if (player.Age >= props.firstage && player.Age <= props.secondage) {
       reducedPlayerObj['interestCounter']++;
@@ -82,7 +105,6 @@ const SuggestedPlayers = props => {
     });
     let playeroles = getRoles(player);
     props.roles.forEach(Role => {
-      console.log({ player, Role });
       if (player[Role] === true) {
         reducedPlayerObj['interestCounter']++;
         reducedPlayerObj['Roles'].push(
@@ -169,7 +191,12 @@ const SuggestedPlayers = props => {
               <td className="w-10">
                 <button
                   type="button"
-                  onClick={() => console.log('clicked')}
+                  onClick={sendplayer.bind(
+                    this,
+                    props.requestID,
+                    player.playerID,
+                    player.userID
+                  )}
                   className="btn btn-primary btn-sm"
                 >
                   Send

@@ -1,6 +1,6 @@
 import React from 'react';
-import RoleOrAttribute from '../../components/RolesOrAttribute';
-import SuggestedPlayers from './components/SuggestedPlayers';
+import RoleOrAttribute from '../../../components/RolesOrAttribute';
+import SuggestedPlayers from './SuggestedPlayers';
 
 const RequestSummary = ({ activeRequest, getTraits }) => {
   const traits = getTraits(activeRequest);
@@ -50,6 +50,7 @@ const RequestSummary = ({ activeRequest, getTraits }) => {
         attributes={attributes}
         roles={roles}
         nationality={activeRequest.nationality}
+        requestID={activeRequest.requestID}
       />
     </div>
   );

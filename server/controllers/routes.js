@@ -15,6 +15,7 @@ const CreateRequest = require('./createrequest');
 const PullOthersPlayerRequests = require('./PullOthersPlayerRequests');
 const MyPlayers = require('./MyFriends');
 const MyPlayerRequests = require('./PullMyPlayerRequests');
+const SendPlayer = require('./SendPlayer');
 
 const db = knex({
   client: 'pg',
@@ -38,5 +39,6 @@ router.post('/createrequest', (req, res) => { CreateRequest.handleCreateRequest(
 router.post('/getplayerrequests', (req, res) => { PullOthersPlayerRequests.handlePullOthersPlayerRequests(req, res, db); });
 router.post('/myplayers', (req, res) => { MyPlayers.handleMyFriends(req, res, db); });
 router.post('/myplayerrequests', (req, res) => { MyPlayerRequests.handlePullMyPlayerRequests(req, res, db); });
+router.post('/sendplayer', (req, res) => { SendPlayer.handleSendPlayer(req, res, db); });
 
 module.exports = router;
