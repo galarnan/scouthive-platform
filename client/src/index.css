@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+@tailwind base;
+@tailwind components;
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'Work Sans', cursive;
 }
+
+body > #root > div {
+  height: 100vh;
+}
+
 
 button {
   cursor: pointer;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { readConfigFile } from 'typescript';
-import SuggestedPlayers from './SuggestedPlayers';
+import SuggestedPlayers from '../OthersPlayerRequests/components/SuggestedPlayers';
 
 const RequestDetails = () => {
   const location = useLocation();

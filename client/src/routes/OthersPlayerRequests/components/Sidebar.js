@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RoleOrAttribute from '../../components/RolesOrAttribute';
-import './SideBar.css';
+import './css/SideBar.css';
 
 // const getRoles = traits => {
 //   const Roles = traits.filter(trait => {
@@ -44,16 +44,7 @@ const Sidebar = ({ PlayerRequests, setactiveRequest, getTraits }) => {
   );
 
   return (
-    <div className="d-flex flex-column align-items-stretch flex-shrink-0 w-20">
-      <a
-        href="/"
-        className="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
-      >
-        <svg className="bi me-2" width="20" height="24">
-          <use xlinkHref="#bootstrap"></use>
-        </svg>
-        <span className="fs-5 fw-semibold">Requests</span>
-      </a>
+    <div className="d-flex pt-1 px-0 flex-column align-items-stretch flex-shrink-0 w-20 sidebar-wrapper">
       <div className="list-group list-group-flush border-bottom scrollarea">
         {requests}
       </div>

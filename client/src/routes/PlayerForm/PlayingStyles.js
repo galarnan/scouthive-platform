@@ -148,7 +148,7 @@ function PlayingStyles(props) {
           />
         </FormGroup>
       );
-    } else if (pos === 'CF' || pos === 'SS') {
+    } else if (pos === 'Centre-Forward' || pos === 'SS') {
       return (
         <FormGroup>
           <FormControlLabel

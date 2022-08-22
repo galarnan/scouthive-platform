@@ -2,43 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/OthersPlayerRequests.css';
 import axios from 'axios';
 import Sidebar from './Sidebar';
+import RequestSummary from './RequestSummary';
+import RoleOrAttribute from '../../components/RolesOrAttribute';
+import FilterBar from './components/FilterBar';
 
 const OthersPlayerRequests = () => {
   const [PlayerRequests, setPlayerRequests] = useState([]);
-  const [activeRequest, setactiveRequest] = useState({});
-  const [activeIndex, setactiveIndex] = useState(0);
+  const [activeRequest, setactiveRequest] = useState(undefined);
 
-  const active_user = parseInt(window.localStorage.getItem('USER_ID'), 10);
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .post('/api/getplayerrequests', {
-        userid: active_user,
-      })
-      .then(response => response.data)
-      .then(requests => {
-        console.log(requests);
-        setPlayerRequests(requests);
-        setactiveRequest(requests[activeIndex]);
-      });
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(activeRequest);
-  //   setactiveRequest(PlayerRequests[activeIndex]);
-  //   console.log(activeRequest);
-  // }, []);
-
-  const RequestDetails = request => {
-    navigate('/requestdetails', {
-      state: { details: request },
-    });
-  };
-
-  //filtering out traits into array
+  //function that filters out traits from request into array
   const getTraits = request => {
     if (request) {
       const traits = Object.keys(request).reduce((arr, k) => {
@@ -51,32 +26,65 @@ const OthersPlayerRequests = () => {
     }
   };
 
+  const active_user = parseInt(window.localStorage.getItem('USER_ID'), 10);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    //fetching connections' player requests from db
+    axios
+      .post('/api/getplayerrequests', {
+        userid: active_user,
+      })
+      .then(response => response.data)
+      .then(requests => {
+        setPlayerRequests(requests);
+        setactiveRequest(requests[0]);
+      });
+  }, []);
+
+  useEffect(() => {
+    //pushing attributes, age range and roles into active request
+    if (activeRequest) {
+      const traits = getTraits(activeRequest);
+      const Roles = traits.filter(trait => RoleOrAttribute(trait) == 'role');
+      const Attributes = traits.filter(
+        trait => RoleOrAttribute(trait) == 'attribute'
+      );
+      const FirstAge = activeRequest.Ages.slice(2, 4);
+      const SecondAge = activeRequest.Ages.slice(7, 9);
+      setactiveRequest({
+        ...activeRequest,
+        Attributes,
+        FirstAge,
+        SecondAge,
+        Roles,
+      });
+    }
+  }, []);
+
+  const RequestDetails = request => {
+    navigate('/requestdetails', {
+      state: { details: request },
+    });
+  };
+
   return (
-    <div className="row">
-      <Sidebar
-        className="col"
-        PlayerRequests={PlayerRequests}
-        setactiveRequest={setactiveRequest}
-        getTraits={getTraits}
-      />
-      <div className="col text-start ps-5">
-        <h1>{activeRequest.Positions}</h1>
-        <p>
-          Plays consistant minutes with no recent injury records. Housing and
-          car provided.
-        </p>
-        <p>
-          <span className="fw-bold">Age: </span>
-          {activeRequest.Ages}
-        </p>
-        <p>
-          <span className="fw-bold">Foot: </span>
-          {activeRequest.Foot}
-        </p>
-        <p className="fw-bold">Traits: </p>
-        <p>{getTraits(activeRequest)}</p>
-      </div>
-      {/* {PlayerRequests.map((request, i) => {
+    <>
+      {/* <FilterBar /> */}
+      <div className="row fillpage">
+        <div className="w-10 margincolor"></div>
+        <Sidebar
+          className="col"
+          PlayerRequests={PlayerRequests}
+          setactiveRequest={setactiveRequest}
+          getTraits={getTraits}
+        />
+        {activeRequest ? (
+          <RequestSummary activeRequest={activeRequest} getTraits={getTraits} />
+        ) : (
+          <></>
+        )}
+        {/* {PlayerRequests.map((request, i) => {
         return (
           <div className="card w-40 mx-5 my-1" key={i}>
             <div className="card-body">
@@ -99,7 +107,9 @@ const OthersPlayerRequests = () => {
         );
       })}
       ; */}
-    </div>
+        <div className="w-10 margincolor"></div>
+      </div>
+    </>
   );
 };
 

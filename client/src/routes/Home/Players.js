@@ -38,6 +38,17 @@ function Players() {
       .catch(err => console.log(err));
   }
 
+  const convertPositionText = position => {
+    //change position text to abbreviation (eg. Central Midfield => CM)
+    const hasDash = position.includes('-'); // char before second capital is either '-' or ' '
+    if (hasDash) {
+      position = position[0] + position[position.indexOf('-') + 1];
+    } else {
+      position = position[0] + position[position.indexOf(' ') + 1];
+    }
+    return position;
+  };
+
   const renderedPlayers = filteredplayers.map((player, key) => (
     <tr key={key}>
       <td className="relative">
@@ -53,8 +64,7 @@ function Players() {
       <td>{player.Age}</td>
       <td>{player.Foot[0].toUpperCase()}</td>
       <td>{player.Club}</td>
-      <td>{player.Position}</td>
-      <td>{player.Nationality}</td>
+      <td>{convertPositionText(player.Position)}</td>
       <td className="w-20">
         <button
           type="button"

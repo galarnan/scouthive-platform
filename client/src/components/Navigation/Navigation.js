@@ -14,7 +14,7 @@ const Navigation = props => {
   if (props.isSignedIn) {
     return (
       <nav
-        className="f5 p-4 pb-0"
+        className="f5 p-4 pb-0 relative"
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
