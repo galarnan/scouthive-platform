@@ -89,7 +89,7 @@ function Players() {
         + Create Request
       </button>
       <h5 className="text-start bold mt-4">My players</h5>
-      <table className="w-50 align-middle">
+      <table className="w-50 align-middle tablePlayers">
         <tbody>{renderedPlayers}</tbody>
       </table>
       <p

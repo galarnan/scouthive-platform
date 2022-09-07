@@ -10,7 +10,7 @@ tr:nth-child(odd) {
   background-color: #F3F3F3;
 }
 
-table {
+.tablePlayers {
   border: 0px solid #CDCDCD;
   border-radius: 10px;
   overflow: hidden; 

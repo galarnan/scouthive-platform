@@ -14,21 +14,29 @@ const Navigation = props => {
   if (props.isSignedIn) {
     return (
       <nav
-        className="f5 p-4 pb-0 relative"
         style={{
-          display: 'flex',
+          display: 'inline-flex',
+          alignItems: 'center',
           justifyContent: 'flex-end',
           color: '#4D4D4D',
           fontWeight: 600,
           boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+          position: 'sticky',
+          backgroundColor: 'white',
+          width: '100%',
+          zIndex: 2,
+          top: 0,
+          height: '10%',
+          paddingLeft: '10%',
+          paddingRight: '10%',
         }}
       >
-        <Logo className="pa3" />
+        <Logo className="" />
         <p
           onClick={() => {
             navigate('/home');
           }}
-          className={`link dim pa3 pointer ${
+          className={`link dim pointer mb-0 mx-3 ${
             location === 'home' ? 'blue fw-bold' : ''
           }`}
         >
@@ -38,7 +46,7 @@ const Navigation = props => {
           onClick={() => {
             navigate('/connections');
           }}
-          className={`link dim pa3 pointer ${
+          className={`link dim mx-3 pointer mb-0 ${
             location === 'connections' ? 'blue fw-bold' : ''
           }`}
         >
@@ -48,7 +56,7 @@ const Navigation = props => {
           onClick={() => {
             navigate('/playerrequests');
           }}
-          className={`link dim pa3 pointer ${
+          className={`link dim mx-3 pointer mb-0 ${
             location === 'playerrequests' ? 'blue fw-bold' : ''
           }`}
         >
@@ -58,7 +66,7 @@ const Navigation = props => {
           onClick={() => {
             navigate('/myplayerrequests');
           }}
-          className={`link dim pa3 pointer ${
+          className={`link dim mx-3 pointer mb-0 ${
             location === 'myplayerrequests' ? 'blue fw-bold' : ''
           }`}
         >
@@ -70,7 +78,7 @@ const Navigation = props => {
             navigate('/');
             props.authentication(false);
           }}
-          className="link dim pa3 pointer"
+          className="link dim ms-3 pointer mb-0"
         >
           Sign Out
         </p>

@@ -21,8 +21,6 @@ import PlayerRequestDetails from './routes/PlayerRequestPage/ViewRequestDetails'
 import MyPlayerRequests from './routes/MyPlayerRequests/MyPlayerRequests';
 import Logo from './components/Logo/Logo';
 
-import PrivateOutlet from './components/PrivateRoute/PrivateOutlet';
-
 function App() {
   const [isSignedIn, setisSignedIn] = useState(false);
 

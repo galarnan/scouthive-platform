@@ -34,6 +34,6 @@ const PlayerDetails: FC = () => {
       })}
     </div>
   );
-}
+};
 
 export default PlayerDetails;

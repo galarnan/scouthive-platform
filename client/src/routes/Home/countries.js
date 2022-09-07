@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const countries = {
   "Afghanistan": "AF",
   "Albania": "AL",

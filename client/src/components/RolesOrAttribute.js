@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const traits = {
     'Long Passing': 'attribute',
     'Short Passing': 'attribute',

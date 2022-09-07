@@ -10,14 +10,18 @@ tr:nth-child(odd) {
   background-color: #F3F3F3;
 }
 
-table {
+tr:first-of-type {
+  background-color: transparent;
+  border: 0px;
+}
+
+.tableSuggestions {
   border: 0px solid #CDCDCD;
-  border-radius: 10px;
-  overflow: hidden; 
-  box-shadow: 0px 0px 5px #CDCDCD;
   font-family: 'Quicksand', cursive;
   font-weight: 500;
   font-size:0.75rem;
+  margin-top:  20px;
+  overflow: auto;
 }
 
 /* .tdborder {
@@ -51,10 +55,23 @@ button {
 }
 
 .margincolor {
-  background-color: rgb(241 245 249);
+  background-color: #EEEEEE;
 }
 
-.fillpage {
+.fillpage90 {
+  height: 90%;
+}
+
+.fillpage100 {
   height: 100%;
 }
 
+.generalBorder {
+  border: 1px solid #B1B1B1;
+}
+
+.topBorder {
+  border-top: 1px solid #B1B1B1;
+  margin-top: -4rem;
+  left: -50px;
+}

@@ -70,21 +70,24 @@ const OthersPlayerRequests = () => {
 
   return (
     <>
-      {/* <FilterBar /> */}
-      <div className="row fillpage">
-        <div className="w-10 margincolor"></div>
-        <Sidebar
-          className="col"
-          PlayerRequests={PlayerRequests}
-          setactiveRequest={setactiveRequest}
-          getTraits={getTraits}
-        />
-        {activeRequest ? (
-          <RequestSummary activeRequest={activeRequest} getTraits={getTraits} />
-        ) : (
-          <></>
-        )}
-        {/* {PlayerRequests.map((request, i) => {
+      <div className="margincolor fillpage90 d-flex row align-items-center center py-4">
+        {/* <FilterBar /> */}
+        <div className="row fillpage100 bg-white w-80 px-0 generalBorder">
+          <Sidebar
+            className="col"
+            PlayerRequests={PlayerRequests}
+            setactiveRequest={setactiveRequest}
+            getTraits={getTraits}
+          />
+          {activeRequest ? (
+            <RequestSummary
+              activeRequest={activeRequest}
+              getTraits={getTraits}
+            />
+          ) : (
+            <></>
+          )}
+          {/* {PlayerRequests.map((request, i) => {
         return (
           <div className="card w-40 mx-5 my-1" key={i}>
             <div className="card-body">
@@ -107,7 +110,7 @@ const OthersPlayerRequests = () => {
         );
       })}
       ; */}
-        <div className="w-10 margincolor"></div>
+        </div>
       </div>
     </>
   );

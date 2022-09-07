@@ -1,10 +1,38 @@
 
 .focus {
-  background-color: #ADCFF8 !important;}
+  background-color: rgba(25, 126, 245, 1) !important;
+  
+}
+
+.focus * {
+  color: white;
+}
+  
 
 .sidebar-wrapper{
   max-height: 100%;
   overflow-y: auto;
+  z-index: 0;
   }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  
 
 

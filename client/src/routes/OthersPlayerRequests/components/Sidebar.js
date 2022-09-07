@@ -14,28 +14,30 @@ const Sidebar = ({ PlayerRequests, setactiveRequest, getTraits }) => {
   let traits = '';
   const requests = PlayerRequests.map(
     (request, i) => (
-      traits = getTraits(request),
+      (traits = getTraits(request)),
       (
         <a
           href="#"
-          className={`list-group-item list-group-item-action lh-tight my-0 ${activeIndex === i ? 'focus' : ''}`}
+          className={`list-group-item list-group-item-action my-0 ${
+            activeIndex === i ? 'focus' : ''
+          }`}
           key={i}
-          onClick = {()=> {
+          onClick={() => {
             setactiveIndex(i);
             setactiveRequest(request);
           }}
         >
           <div className="text-start d-flex w-100 f4 align-items-center justify-content-between ms-3">
-            <strong className="mb-1">{request.Positions.slice(2, -2)}</strong>
+            <strong className="mb-0">{request.Positions.slice(2, -2)}</strong>
           </div>
           {/*filtering out Roles from request*/}
           <p className="text-start mb-1 ms-3">
             {String(traits.filter(trait => RoleOrAttribute(trait) == 'role'))}
           </p>
-          <p className="f6 text-start mb-0 gray ms-3">
+          <p className="f6 text-start my-0 py-0 gray ms-3">
             Created by {request.name}
           </p>
-          <p className="f6 text-start mb-0 gray ms-3">
+          <p className="f6 text-start my-0 gray ms-3">
             {request.Created.slice(0, 10)}
           </p>
         </a>
@@ -44,7 +46,7 @@ const Sidebar = ({ PlayerRequests, setactiveRequest, getTraits }) => {
   );
 
   return (
-    <div className="d-flex pt-1 px-0 flex-column align-items-stretch flex-shrink-0 w-20 sidebar-wrapper">
+    <div className="d-flex px-0 flex-column align-items-stretch flex-shrink-0 w-25 sidebar-wrapper">
       <div className="list-group list-group-flush border-bottom scrollarea">
         {requests}
       </div>

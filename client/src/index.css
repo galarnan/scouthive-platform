@@ -2,10 +2,32 @@
 @tailwind base;
 @tailwind components;
 
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Work Sans', cursive;
+  height: 100vh;
+  max-width: 220vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  top:0;
+  bottom:0;
+  left: 0;
+  right: 0;
+
+}
+
+html {
+  top:0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  max-height: 100vh;
+  max-width: 220vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 body > #root > div {
@@ -20,3 +42,4 @@ button {
 .container {
   height: 60vh;
 }
+

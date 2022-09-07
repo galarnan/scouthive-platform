@@ -2,8 +2,8 @@ import React from 'react';
 
 const Logo = () => {
   return (
-    <h3
-      className="text-start me-auto pa2"
+    <h4
+      className="text-start me-auto mb-0"
       style={{
         fontFamily: 'Quicksand',
         fontWeight: 800,
@@ -12,7 +12,7 @@ const Logo = () => {
       }}
     >
       SCOUTHIVE<span style={{ color: '#197EF5' }}>.</span>
-    </h3>
+    </h4>
   );
 };
 

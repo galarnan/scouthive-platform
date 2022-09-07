@@ -32,7 +32,7 @@ const convertPositionText = position => {
 };
 
 const sendplayer = (requestID, playerID, userID, e) => {
-  console.log({requestID, playerID, userID})
+  console.log({ requestID, playerID, userID });
   axios
     .post('/api/sendplayer', {
       requestID,
@@ -47,16 +47,18 @@ const sendplayer = (requestID, playerID, userID, e) => {
     });
 };
 
-const checkIfSent = (requestID, playerID, userID)  = {
-
-}
-
 const SuggestedPlayers = props => {
   const players = useSelector(selectAllPlayers);
   let reducedPlayerArray = [];
 
+  const wasPlayerSent = id => {
+    console.log(typeof id);
+    if (props.offeredids.includes(id.toString())) return true;
+    else return false;
+  };
+
   players.forEach(player => {
-    console.log(player)
+    console.log(player);
     //continue only if player is in relevant position,
     if (
       !props.position.includes(player.Position[0]) || //Player.Position[0/1] refer to abbreviation
@@ -133,80 +135,96 @@ const SuggestedPlayers = props => {
   };
 
   return (
-    <table className="my-4 align-middle">
-      <tbody>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Pos.</th>
-          <th>Foot</th>
-          <th>Attributes</th>
-          <th>Role</th>
-          <th>Match %</th>
-          <th></th>
-          <th></th>
-        </tr>
-        {reducedPlayerArray.map((player, key) => {
-          return (
-            <tr key={key}>
-              <td>{player.Name}</td>
-              <td className={`text ${player.Age[1]}`}>{player.Age[0]}</td>
-              <td className={`text ${player.Position[1]}`}>
-                {convertPositionText(player.Position[0])}
-              </td>
-              <td className={`text ${player.Foot[1]}`}>
-                {player.Foot[0][0].toUpperCase()}
-              </td>
-              <td>
-                {player.Attributes.map((attribute, k) => {
-                  return (
-                    <p
-                      key={k}
-                      className={`m-0 text-start lh-copy text ${attribute[1]}`}
-                    >
-                      {attribute[0]}
-                    </p>
-                  );
-                })}
-              </td>
-              <td>
-                {player.Roles.map((role, j) => {
-                  return (
-                    <span key={j} className={`${role[1]}`}>
-                      {role[0]}
-                    </span>
-                  );
-                })}
-              </td>
-              <td>{calculateMatchPercentage(player.interestCounter)}</td>
-              <td className="w-10">
-                <button
-                  type="button"
-                  onClick={() => console.log('clicked')}
-                  className="btn btn-primary btn-sm"
-                >
-                  Details
-                </button>
-              </td>
-              <td className="w-10">
-                <button
-                  type="button"
-                  onClick={sendplayer.bind(
-                    this,
-                    props.requestID,
-                    player.playerID,
-                    player.userID
-                  )}
-                  className="btn btn-primary btn-sm"
-                >
-                  Send
-                </button>
-              </td>
+    <>
+      <p className="text-end gray mb-0 pe-4 mt-3 topBorder">
+        {reducedPlayerArray.length} results
+      </p>
+      <div style={{ maxHeight: '50%', overflow: 'auto' }}>
+        <table className="align-middle">
+          <tbody className="tableSuggestions">
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Pos.</th>
+              <th>Foot</th>
+              <th>Attributes</th>
+              <th>Role</th>
+              <th>Match %</th>
+              <th></th>
+              <th></th>
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+            {reducedPlayerArray.map((player, key) => {
+              let wasSent = wasPlayerSent(player.playerID);
+              return (
+                <tr key={key}>
+                  <td>{player.Name}</td>
+                  <td className={`text ${player.Age[1]}`}>{player.Age[0]}</td>
+                  <td className={`text ${player.Position[1]}`}>
+                    {convertPositionText(player.Position[0])}
+                  </td>
+                  <td className={`text ${player.Foot[1]}`}>
+                    {player.Foot[0][0].toUpperCase()}
+                  </td>
+                  <td>
+                    {player.Attributes.slice(0, 3).map((attribute, k) => {
+                      return (
+                        <p
+                          key={k}
+                          className={`m-0 text-start text ${attribute[1]}`}
+                        >
+                          {attribute[0]}
+                          {k === 2 ? (
+                            <p className="d-inline w-100 text-end"> .... </p>
+                          ) : (
+                            ''
+                          )}
+                        </p>
+                      );
+                    })}
+                  </td>
+                  <td>
+                    {player.Roles.map((role, j) => {
+                      return (
+                        <span key={j} className={`${role[1]}`}>
+                          {role[0]}
+                        </span>
+                      );
+                    })}
+                  </td>
+                  <td>{calculateMatchPercentage(player.interestCounter)}</td>
+                  <td className="w-10">
+                    <button
+                      type="button"
+                      onClick={() => console.log('clicked')}
+                      className="btn btn-light btn-outline-primary btn-sm"
+                    >
+                      Details
+                    </button>
+                  </td>
+                  <td className="w-10">
+                    {}
+                    <button
+                      type="button"
+                      onClick={sendplayer.bind(
+                        this,
+                        props.requestID,
+                        player.playerID,
+                        player.userID
+                      )}
+                      className={`btn btn-primary btn-sm ${
+                        wasSent ? 'disabled btn-success' : ''
+                      }`}
+                    >
+                      {wasSent ? 'Sent' : 'Send'}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

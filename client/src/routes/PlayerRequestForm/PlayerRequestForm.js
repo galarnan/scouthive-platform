@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormGroup, Checkbox, FormControlLabel } from '@mui/material/';

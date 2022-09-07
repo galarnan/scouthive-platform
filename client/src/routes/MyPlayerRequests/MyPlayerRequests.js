@@ -29,6 +29,7 @@ const MyPlayerRequests = () => {
               <h5 className="card-subtitle mb-2 text-muted">
                 {`${request.Foot} footed ${request.Positions.slice(2, -2)}`}
               </h5>
+              {/* eslint-disable-next-line prettier/prettier */}
               <h6 className="card-title">{`Posted on ${request.Created.slice(0, 10)}`}</h6>
               <p></p>
               <button
